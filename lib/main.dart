@@ -3,17 +3,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'bindings/initial_bindings.dart';
 import 'core/constants/config.dart';
 import 'core/constants/themes.dart';
 import 'localization/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'router/app_pages.dart';
 
 Future<void> mainCommon(Config config) async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //Initialize firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   ThemeModeController controller = Get.put(ThemeModeController());
   controller.setTheme();
