@@ -1,4 +1,4 @@
-package com.getx_template.getx_templates
+package com.trafic_bordeaux
 
 import io.flutter.embedding.android.FlutterActivity
 

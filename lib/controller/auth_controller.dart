@@ -4,8 +4,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:getx_templates/models/user_model.dart';
-import 'package:getx_templates/ui/widgets/custom_progress_indicator.dart';
+import 'package:trafic_bordeaux/models/user_model.dart';
+import 'package:trafic_bordeaux/ui/widgets/custom_progress_indicator.dart';
 
 class AuthController extends GetxController {
   static AuthController to = Get.find();

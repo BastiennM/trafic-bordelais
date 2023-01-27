@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.getx_template.getx_templates">
+    package="com.trafic_bordeaux">
    <application
-        android:label="getx_templates"
+        android:label="trafic_bordeaux"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

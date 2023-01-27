@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:getx_templates/design_system/bottom_modal_view.dart';
-import 'package:getx_templates/design_system/buttons_view.dart';
-import 'package:getx_templates/design_system/dialog_popup_view.dart';
+import 'package:trafic_bordeaux/design_system/bottom_modal_view.dart';
+import 'package:trafic_bordeaux/design_system/buttons_view.dart';
+import 'package:trafic_bordeaux/design_system/dialog_popup_view.dart';
 
 import '../bindings/home_bindings.dart';
 import '../design_system/inputs_view.dart';

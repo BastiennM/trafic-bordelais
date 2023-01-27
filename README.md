@@ -1,4 +1,4 @@
-# getx_templates
+# trafic_bordeaux
 
 A template project using getX architecture
 

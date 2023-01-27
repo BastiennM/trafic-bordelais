@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_templates/controller/theme_mode_controller.dart';
+import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import 'package:provider/provider.dart';
 import '../../core/constants/config.dart';
 import 'icon_button.dart';

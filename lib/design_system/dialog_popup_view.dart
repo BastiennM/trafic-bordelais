@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:getx_templates/ui/widgets/confirm_dialog.dart';
-import 'package:getx_templates/ui/widgets/primary_button.dart';
-import 'package:getx_templates/ui/widgets/snackbar.dart';
+import 'package:trafic_bordeaux/ui/widgets/confirm_dialog.dart';
+import 'package:trafic_bordeaux/ui/widgets/primary_button.dart';
+import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
 
 import '../ui/widgets/app_bar.dart';
 

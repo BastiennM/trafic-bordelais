@@ -1,4 +1,4 @@
-import 'package:getx_templates/core/app_export.dart';
+import 'package:trafic_bordeaux/core/app_export.dart';
 
 class Validators {
   static atLeastOne(value, context) => value != null && value != ""

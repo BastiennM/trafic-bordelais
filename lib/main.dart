@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_templates/controller/theme_mode_controller.dart';
+import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bindings/initial_bindings.dart';
 import 'core/constants/config.dart';

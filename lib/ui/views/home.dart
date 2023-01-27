@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_templates/ui/widgets/app_bar.dart';
+import 'package:trafic_bordeaux/ui/widgets/app_bar.dart';
 import '../widgets/primary_button.dart';
 
 class Home extends StatelessWidget {
