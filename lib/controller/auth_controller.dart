@@ -40,7 +40,7 @@ class AuthController extends GetxController {
     //get user data from firestore
     if (_firebaseUser?.uid != null) {
       firestoreUser.bindStream(streamFirestoreUser());
-      await isAdmin();
+      update();
     }
 
     if (_firebaseUser == null) {
@@ -129,105 +129,10 @@ class AuthController extends GetxController {
     }
   }
 
-  //handles updating the user when updating profile
-  Future<void> updateUser(BuildContext context, UserModel user, String oldEmail,
-      String password) async {
-    String authUpdateUserNoticeTitle = 'auth.updateUserSuccessNoticeTitle'.tr;
-    String authUpdateUserNotice = 'auth.updateUserSuccessNotice'.tr;
-    try {
-      customProgressIndicator.show();
-      try {
-        await _auth
-            .signInWithEmailAndPassword(email: oldEmail, password: password)
-            .then((_firebaseUser) async {
-          await _firebaseUser.user!
-              .updateEmail(user.email)
-              .then((value) => _updateUserFirestore(user, _firebaseUser.user!));
-        });
-      } catch (err) {
-        print('Caught error: $err');
-        //not yet working, see this issue https://github.com/delay/flutter_starter/issues/21
-        if (err.toString() ==
-            "[firebase_auth/email-already-in-use] The email address is already in use by another account.") {
-          authUpdateUserNoticeTitle = 'auth.updateUserEmailInUse'.tr;
-          authUpdateUserNotice = 'auth.updateUserEmailInUse'.tr;
-        } else {
-          authUpdateUserNoticeTitle = 'auth.wrongPasswordNotice'.tr;
-          authUpdateUserNotice = 'auth.wrongPasswordNotice'.tr;
-        }
-      }
-      customProgressIndicator.close();
-      Get.snackbar(authUpdateUserNoticeTitle, authUpdateUserNotice,
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 5),
-          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
-          colorText: Get.theme.snackBarTheme.actionTextColor);
-    } on PlatformException catch (error) {
-      customProgressIndicator.close();
-      print(error.code);
-      String authError;
-      switch (error.code) {
-        case 'ERROR_WRONG_PASSWORD':
-          authError = 'auth.wrongPasswordNotice'.tr;
-          break;
-        default:
-          authError = 'auth.unknownError'.tr;
-          break;
-      }
-      Get.snackbar('auth.wrongPasswordNoticeTitle'.tr, authError,
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 10),
-          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
-          colorText: Get.theme.snackBarTheme.actionTextColor);
-    }
-  }
-
-  //updates the firestore user in users collection
-  void _updateUserFirestore(UserModel user, User _firebaseUser) {
-    _db.doc('/users/${_firebaseUser.uid}').update(user.toJson());
-    update();
-  }
-
   //create the firestore user in users collection
   void _createUserFirestore(UserModel user, User _firebaseUser) {
     _db.doc('/users/${_firebaseUser.uid}').set(user.toJson());
     update();
-  }
-
-  //password reset email
-  Future<void> sendPasswordResetEmail(BuildContext context) async {
-    customProgressIndicator.show();
-    try {
-      await _auth.sendPasswordResetEmail(email: emailController.text);
-      customProgressIndicator.close();
-      Get.snackbar(
-          'auth.resetPasswordNoticeTitle'.tr, 'auth.resetPasswordNotice'.tr,
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 5),
-          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
-          colorText: Get.theme.snackBarTheme.actionTextColor);
-    } on FirebaseAuthException catch (error) {
-      customProgressIndicator.close();
-      Get.snackbar('auth.resetPasswordFailed'.tr, error.message!,
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 10),
-          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
-          colorText: Get.theme.snackBarTheme.actionTextColor);
-    }
-  }
-
-  //check if user is an admin user
-  isAdmin() async {
-    await getUser.then((user) async {
-      DocumentSnapshot adminRef =
-      await _db.collection('admin').doc(user.uid).get();
-      if (adminRef.exists) {
-        admin.value = true;
-      } else {
-        admin.value = false;
-      }
-      update();
-    });
   }
 
   // Sign out
