@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_templates/core/utils/navigation_service.dart';
+import 'package:trafic_bordeaux/core/utils/navigation_service.dart';
 
 class CustomProgressIndicator {
   final double width;
@@ -7,8 +7,9 @@ class CustomProgressIndicator {
   final double strokeWidth;
   final Color backgroundColor;
   final Color valueColor;
+  final BuildContext? buildContext;
 
-  const CustomProgressIndicator(
+  const CustomProgressIndicator(this.buildContext,
       {this.width = 20.0,
       this.height = 20.0,
       this.strokeWidth = 2,
@@ -28,6 +29,6 @@ class CustomProgressIndicator {
   }
 
   void close() {
-    Navigator.pop(NavigationService.navigatorKey.currentContext!);
+    Navigator.pop(buildContext!);
   }
 }

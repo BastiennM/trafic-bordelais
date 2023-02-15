@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:getx_templates/ui/widgets/app_bar.dart';
-import 'package:getx_templates/ui/widgets/modal_bottom.dart';
-
-import '../ui/widgets/primary_button.dart';
+import 'package:trafic_bordeaux/ui/widgets/app_bar.dart';
+import 'package:trafic_bordeaux/ui/widgets/modal_bottom.dart';
+import 'package:trafic_bordeaux/ui/widgets/primary_button.dart';
 
 class BottomModalView extends StatelessWidget {
   const BottomModalView({super.key});

@@ -12,8 +12,11 @@ abstract class Routes {
 
 abstract class _Paths {
   static const HOME = '/home';
+  static const WIDGET_KIT = '/widget_kit';
   static const BUTTONS = '/buttons';
   static const INPUTS = '/inputs';
   static const MODAL = '/modal';
   static const DIALOG_POPUP = '/dialog_popup';
+  static const LOGIN = '/login';
+  static const REGISTER = '/register';
 }

@@ -1,4 +1,4 @@
-import 'package:getx_templates/controller/theme_mode_controller.dart';
+import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 
 import '../core/utils/pref_utils.dart';
 import '../core/utils/network.dart';

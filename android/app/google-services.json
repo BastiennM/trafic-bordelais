@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "763627025197",
+    "project_id": "trafic-bordeaux",
+    "storage_bucket": "trafic-bordeaux.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763627025197:android:2658102e085560f99199a4",
+        "android_client_info": {
+          "package_name": "com.trafic_bordeaux"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763627025197-h1nfaj2kt34spti8si9uvjm3ltgrrup7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLcJ_zrFw-JkVvsdATipGL4c2BdbGpuj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763627025197-h1nfaj2kt34spti8si9uvjm3ltgrrup7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

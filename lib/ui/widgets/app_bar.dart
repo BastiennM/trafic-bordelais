@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_templates/controller/theme_mode_controller.dart';
+import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import 'package:provider/provider.dart';
 import '../../core/constants/config.dart';
 import 'icon_button.dart';
@@ -29,7 +29,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
         elevation: 5.0,
-        leading: leading
+        leading: leading ?? Obx(
+              () => CustomIconButton(
+            icon: Icon(themeModeController.isDark.value ? Icons.light_mode : Icons.dark_mode),
+            onPressed: () {
+              themeModeController.changeMode();
+              themeModeController.saveThemeStatus();
+            },
+          ),
+        ),
     );
   }
 

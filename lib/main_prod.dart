@@ -1,4 +1,4 @@
-import 'package:getx_templates/core/constants/config.dart';
+import 'core/constants/config.dart';
 import 'main.dart';
 
 void main() {

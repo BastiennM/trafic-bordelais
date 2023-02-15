@@ -1,4 +1,4 @@
-import 'package:getx_templates/core/app_export.dart';
+import 'package:trafic_bordeaux/core/app_export.dart';
 
 class Validators {
   static atLeastOne(value, context) => value != null && value != ""
@@ -21,6 +21,12 @@ class Validators {
   ).hasMatch(value)
       ? null
       : 'code'.tr;
+
+  static isValidPassword(value, context) =>
+      RegExp(r'/^(?=.*\d).{8,}$/')
+          .hasMatch(value)
+          ? null
+          : 'validPassword'.tr;
 
   static isValidEmail(value, context) =>
       RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
