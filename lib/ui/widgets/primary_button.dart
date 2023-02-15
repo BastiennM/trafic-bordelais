@@ -37,7 +37,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CustomProgressIndicator customProgressIndicator = CustomProgressIndicator(valueColor: fill ? Colors.white : getColor);
+    CustomProgressIndicator customProgressIndicator = CustomProgressIndicator(context,valueColor: fill ? Colors.white : getColor);
 
     return Container(
       decoration: BoxDecoration(

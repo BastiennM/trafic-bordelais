@@ -148,7 +148,7 @@ abstract class Themes {
   );
 
   static const TextStyle _lightScreenHeadingTextStyle = TextStyle(color: _lightOnPrimaryColor, fontSize: 20);
-  static const TextStyle _lightScreenTextStyle1 = TextStyle(color: _lightOnPrimaryColor, fontSize: 14);
+  static const TextStyle _lightScreenTextStyle1 = TextStyle(color: _lightOnPrimaryColor, fontSize: 12);
   static const TextStyle _lightScreenTextStyle2 = TextStyle(color: _lightGreyText, fontSize: 16);
 
   static final TextStyle _darkScreenHeadingTextStyle = _lightScreenHeadingTextStyle.copyWith(color: _darkOnPrimaryColor);

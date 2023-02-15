@@ -3,7 +3,7 @@ import 'main.dart';
 
 void main() {
   Config config = Config(
-    appName: 'Flutter template',
+    appName: 'Trafic Bordelais',
   );
 
   mainCommon(config);

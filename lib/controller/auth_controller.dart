@@ -6,18 +6,21 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:trafic_bordeaux/models/user_model.dart';
 import 'package:trafic_bordeaux/ui/widgets/custom_progress_indicator.dart';
+import 'package:trafic_bordeaux/ui/widgets/loading.dart';
+import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
 
 class AuthController extends GetxController {
   static AuthController to = Get.find();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   Rxn<User> firebaseUser = Rxn<User>();
   Rxn<UserModel> firestoreUser = Rxn<UserModel>();
   final RxBool admin = false.obs;
-  CustomProgressIndicator customProgressIndicator = const CustomProgressIndicator();
+  CustomProgressIndicator customProgressIndicator = CustomProgressIndicator(Get.context);
   @override
   void onReady() async {
     //run every time auth state changes
@@ -88,16 +91,13 @@ class AuthController extends GetxController {
       customProgressIndicator.close();
     } catch (error) {
       customProgressIndicator.close();
-      Get.snackbar('auth.signInErrorTitle'.tr, 'auth.signInError'.tr,
-          snackPosition: SnackPosition.BOTTOM,
-          duration: Duration(seconds: 7),
-          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
-          colorText: Get.theme.snackBarTheme.actionTextColor);
+      CustomSnackbar().buildSnackbar('Erreur', 'Erreur lors du login', TypeMessage.error);
     }
   }
 
   // User registration using email and password
   registerWithEmailAndPassword(BuildContext context) async {
+    showLoadingIndicator();
     customProgressIndicator.show();
     try {
       await _auth
@@ -117,15 +117,11 @@ class AuthController extends GetxController {
         _createUserFirestore(newUser, result.user!);
         emailController.clear();
         passwordController.clear();
-        customProgressIndicator.close();
+        hideLoadingIndicator();
       });
     } on FirebaseAuthException catch (error) {
-      customProgressIndicator.close();
-      Get.snackbar('auth.signUpErrorTitle'.tr, error.message!,
-          snackPosition: SnackPosition.BOTTOM,
-          duration: Duration(seconds: 10),
-          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
-          colorText: Get.theme.snackBarTheme.actionTextColor);
+      hideLoadingIndicator();
+      CustomSnackbar().buildSnackbar('Erreur', error.message ?? "", TypeMessage.error);
     }
   }
 

@@ -29,7 +29,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
         elevation: 5.0,
-        leading: leading
+        leading: leading ?? Obx(
+              () => CustomIconButton(
+            icon: Icon(themeModeController.isDark.value ? Icons.light_mode : Icons.dark_mode),
+            onPressed: () {
+              themeModeController.changeMode();
+              themeModeController.saveThemeStatus();
+            },
+          ),
+        ),
     );
   }
 
