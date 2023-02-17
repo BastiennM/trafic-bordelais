@@ -28,7 +28,7 @@ class Authentication extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top:50.0),
                       child: CustomIconButton(
-                            onPressed: () => Get.toNamed('/home'),
+                            onPressed: () => Get.offNamed('/home'),
                             icon: Icon(Icons.close,
                                 color: themeModeController.isDark.value
                                     ? Colors.black

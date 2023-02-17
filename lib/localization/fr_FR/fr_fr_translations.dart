@@ -15,6 +15,6 @@ final Map<String, String> frFR = {
   'newUser' : "Vous n'etes pas encore inscrit ?",
   'registerNow' : "S'inscrire",
   'loginNow' : "Se connecter",
-  'titleLogin' : 'Bonjour ! Heureux de vous revoir !',
+  'titleLogin' : 'Bonjour, heureux de vous revoir !',
   'titleRegister' : 'Bonjour ! Inscrivez-vous pour commencer',
 };
