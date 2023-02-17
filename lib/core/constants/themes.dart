@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 abstract class Themes {
   static Color primary = const Color(0xff246EE9);
-  static Color primaryLight = const Color(0xff246EE9);
-  static Color primaryDark = const Color(0xff246EE9);
+  static Color primaryLight = const Color(0xfFFFFFFF);
+  static Color primaryDark = const Color(0xff000000);
   static Color primaryDeep = const Color(0xff032d66);
   static Color accentLight = Colors.black;
   static Color iconColor = const Color(0xffF3F5F9);
@@ -28,12 +29,12 @@ abstract class Themes {
   static final Color? _darkGrey50 = Colors.grey[50];
   static const Color _darkGrey100 = Color(0xFFB2B2B2);
   static const Color _darkGrey200 = Color(0xFF7E7E7E);
-  static const Color _darkGrey300 = Color(0xFF303030);
+  static const Color _darkGrey300 = Color(0xFF121212);
   static final Color? _darkGrey700 = Colors.grey[700];
   static final Color? _darkGrey900 = Colors.grey[900];
 
   static final ThemeData lightTheme = ThemeData(
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.black,
     primaryColor: primaryLight,
     navigationRailTheme: NavigationRailThemeData(
       backgroundColor: _lightWhite,
@@ -41,10 +42,6 @@ abstract class Themes {
       unselectedIconTheme: IconThemeData(color: _lightUnselectedIconColor),
       selectedLabelTextStyle: TextStyle(color: primaryLight),
       unselectedLabelTextStyle: const TextStyle(color: _lightBlack),
-    ),
-    buttonTheme: ButtonThemeData(
-        buttonColor: primaryLight,         //  <-- light color
-        textTheme: ButtonTextTheme.primary, //  <-- dark text for light background
     ),
     focusColor:_lightGrey50,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -76,6 +73,7 @@ abstract class Themes {
   static final ThemeData darkTheme = ThemeData(
     backgroundColor: Colors.white,
     primaryColor: primaryDark,
+
     navigationRailTheme: NavigationRailThemeData(
       backgroundColor: _darkBackgroundColor,
       selectedIconTheme: IconThemeData(color: primaryDark),
@@ -95,7 +93,7 @@ abstract class Themes {
     primaryIconTheme: const IconThemeData(color: _darkWhite),
     scaffoldBackgroundColor: _darkGrey300,
     appBarTheme: AppBarTheme(
-      backgroundColor: primary,
+      backgroundColor: _darkGrey700,
       iconTheme: const IconThemeData(color: _darkOnPrimaryColor),
     ),
     colorScheme: ColorScheme(
@@ -112,46 +110,27 @@ abstract class Themes {
       brightness: Brightness.light,
     ),
     iconTheme: IconThemeData(color: iconColor),
-    textTheme: _darkTextTheme,
+    textTheme: _darkTextTheme
   );
 
   static final TextTheme _darkTextTheme = TextTheme(
-    caption: _darkScreenHeadingTextStyle,
-    button: _darkScreenHeadingTextStyle,
-    overline: _darkScreenHeadingTextStyle,
-    bodyText1: _darkScreenTaskNameTextStyle,
-    bodyText2: _darkScreenTaskDurationTextStyle,
-    headline2: _darkScreenHeadingTextStyle,
-    headline1: _darkScreenHeadingTextStyle,
-    headline3: _darkScreenHeadingTextStyle,
-    headline4: _darkScreenHeadingTextStyle,
-    headline5: _darkScreenHeadingTextStyle,
-    headline6: _darkScreenHeadingTextStyle,
-    subtitle1: _darkScreenHeadingTextStyle,
-    subtitle2: _darkScreenHeadingTextStyle,
+    titleLarge: _darkTitleLarge,
+    titleSmall: _darkTitleSmall,
+    titleMedium: _darkTitleMedium
   );
 
   static const TextTheme _lightTextTheme = TextTheme(
-    caption: _lightScreenHeadingTextStyle,
-    button: _lightScreenHeadingTextStyle,
-    overline: _lightScreenHeadingTextStyle,
-    bodyText1: _lightScreenTextStyle1,
-    bodyText2: _lightScreenTextStyle2,
-    headline2: _lightScreenHeadingTextStyle,
-    headline1: _lightScreenHeadingTextStyle,
-    headline3: _lightScreenHeadingTextStyle,
-    headline4: _lightScreenHeadingTextStyle,
-    headline5: _lightScreenHeadingTextStyle,
-    headline6: _lightScreenHeadingTextStyle,
-    subtitle1: _lightScreenHeadingTextStyle,
-    subtitle2: _lightScreenHeadingTextStyle,
+    titleLarge: _lightTitleLarge,
+    titleSmall: _lightTitleSmall,
+    titleMedium: _lightTitleMedium
   );
 
   static const TextStyle _lightScreenHeadingTextStyle = TextStyle(color: _lightOnPrimaryColor, fontSize: 20);
-  static const TextStyle _lightScreenTextStyle1 = TextStyle(color: _lightOnPrimaryColor, fontSize: 12);
-  static const TextStyle _lightScreenTextStyle2 = TextStyle(color: _lightGreyText, fontSize: 16);
+  static const TextStyle _lightTitleLarge = TextStyle(color: _lightOnPrimaryColor, fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle _lightTitleSmall = TextStyle(color: _lightOnPrimaryColor, fontSize: 15);
+  static const TextStyle _lightTitleMedium = TextStyle(color: _lightOnPrimaryColor, fontSize: 20);
 
-  static final TextStyle _darkScreenHeadingTextStyle = _lightScreenHeadingTextStyle.copyWith(color: _darkOnPrimaryColor);
-  static final TextStyle _darkScreenTaskNameTextStyle = _lightScreenTextStyle1.copyWith(color: _darkOnPrimaryColor);
-  static final TextStyle _darkScreenTaskDurationTextStyle = _lightScreenTextStyle2.copyWith(color: _darkOnPrimaryColor);
+  static final TextStyle _darkTitleLarge = _lightScreenHeadingTextStyle.copyWith(color: _darkOnPrimaryColor, fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle _darkTitleSmall = TextStyle(color: _darkOnPrimaryColor, fontSize: 15);
+  static const TextStyle _darkTitleMedium = TextStyle(color: _darkOnPrimaryColor, fontSize: 20);
 }

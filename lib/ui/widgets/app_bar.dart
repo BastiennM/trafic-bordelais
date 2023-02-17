@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final themeModeController = Get.put(ThemeModeController());
     return AppBar(
-        title: Text(title ?? context.read<Config>().appName,style: Theme.of(context).textTheme.headline4?.copyWith(color:Theme.of(context).backgroundColor)),
+        title: Text(title ?? context.read<Config>().appName,style: Theme.of(context).textTheme.titleMedium?.copyWith(color:Colors.white)),
         actions: actions ?? [
           Obx(
                 () => CustomIconButton(
@@ -36,6 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               themeModeController.changeMode();
               themeModeController.saveThemeStatus();
             },
+                backgroundColor: Colors.transparent,
           ),
         ),
     );

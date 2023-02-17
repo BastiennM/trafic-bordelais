@@ -75,11 +75,11 @@ class CustomButton extends StatelessWidget {
   Widget getText(context) {
     return Text(label,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.bodyText1?.copyWith(
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(
               color: disabled || onPressed == null
                   ? ColorPalette.grey200
                   : fill
-                      ? Colors.white
+                      ? Theme.of(Get.key.currentContext!).primaryColor
                       : color ?? Theme.of(Get.key.currentContext!).primaryColor,
             ));
   }
@@ -100,7 +100,7 @@ class CustomButton extends StatelessWidget {
         finalColor = color ?? Colors.orangeAccent;
         break;
       case TypeButton.initial:
-        finalColor = color ?? Theme.of(Get.key.currentContext!).primaryColor;
+        finalColor = color ?? Theme.of(Get.key.currentContext!).backgroundColor;
         break;
     }
     return finalColor;

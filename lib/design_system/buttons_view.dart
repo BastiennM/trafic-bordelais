@@ -26,7 +26,7 @@ class _ButtonsViewState extends State<ButtonsView> {
           child: Column(
             children: [
               const SizedBox(height:30),
-              Text('Buttons with Loading and Disabled option', style: Theme.of(context).textTheme.bodyText1),
+              Text('Buttons with Loading and Disabled option', style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height:20),
               Wrap(
                 runSpacing: 10,
@@ -49,7 +49,7 @@ class _ButtonsViewState extends State<ButtonsView> {
                 ],
               ),
               const Spacer(),
-              Text('Buttons with different color and type using snackbars on click',textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyText1),
+              Text('Buttons with different color and type using snackbars on click',textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height:20),
               Wrap(
                 runSpacing: 10,
@@ -61,7 +61,7 @@ class _ButtonsViewState extends State<ButtonsView> {
                 ]
               ),
               const Spacer(),
-              Text('Different icons with color',textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyText1),
+              Text('Different icons with color',textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height:20),
               Wrap(
                   spacing: 10,

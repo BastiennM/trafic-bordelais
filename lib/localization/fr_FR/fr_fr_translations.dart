@@ -5,5 +5,16 @@ final Map<String, String> frFR = {
   'validEmail': "L'email n'est pas valide",
   'validPassword': "Votre mot de passe doit contenir au moins 8 charactère et un nombre",
   'validUrl': "L'url fourni n'est pas valide",
-  "tooShort": "Vous devez rentrer au moins @number lettres"
+  "tooShort": "Vous devez rentrer au moins @number lettres",
+  'login': 'Se connecter',
+  'register' : 'S\'inscrire',
+  'password' : 'Mot de passe',
+  'email' : 'Mail',
+  'emailPlaceholder': 'johndoe@gmail.com',
+  'alreadyRegistered' : 'Vous avez déjà un compte ?',
+  'newUser' : "Vous n'etes pas encore inscrit ?",
+  'registerNow' : "S'inscrire",
+  'loginNow' : "Se connecter",
+  'titleLogin' : 'Bonjour ! Heureux de vous revoir !',
+  'titleRegister' : 'Bonjour ! Inscrivez-vous pour commencer',
 };

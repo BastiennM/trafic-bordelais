@@ -5,5 +5,16 @@ final Map<String, String> enUs = {
   'validEmail': "Email is not valid",
   'validPassword': "Your password must contain at least 8 characters and a number",
   'validUrl': "URL is not valid",
-  "tooShort": "You must enter at least @number letters"
+  "tooShort": "You must enter at least @number letters",
+  'register': 'Register',
+  'login' : 'Login',
+  'password': 'Password',
+  'email' : 'Email',
+  'emailPlaceholder': 'johndoe@gmail.com',
+  'alreadyRegistered' : 'Already have an account ?',
+  'newUser' : "Don’t have an account ?",
+  'registerNow' : "Register now",
+  'loginNow' : "Login now",
+  'titleLogin': 'Welcome back! Glad to see you, Again!',
+  'titleRegister' : 'Hello! Register to get started',
 };
