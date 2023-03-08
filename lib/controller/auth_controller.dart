@@ -58,6 +58,8 @@ class AuthController extends GetxController {
     }
   }
 
+  bool get isConnected => firebaseUser.value?.uid != null;
+
   // Firebase user one-time fetch
   Future<User> get getUser async => _auth.currentUser!;
 

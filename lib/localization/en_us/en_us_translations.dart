@@ -17,4 +17,6 @@ final Map<String, String> enUs = {
   'loginNow' : "Login now",
   'titleLogin': 'Welcome back! Glad to see you, Again!',
   'titleRegister' : 'Hello! Register to get started',
+  'myTrips' : 'My trips',
+  'themesMode' : 'Application theme',
 };

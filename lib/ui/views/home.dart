@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
-          CustomIconButton(onPressed: () { Get.toNamed('/login'); }, icon: const Icon(Icons.person),backgroundColor: Colors.transparent,)
+          CustomIconButton(onPressed: () { Get.toNamed('/profil'); }, icon: const Icon(Icons.person),backgroundColor: Colors.transparent,)
         ],
       ),
       body: Placeholder(),

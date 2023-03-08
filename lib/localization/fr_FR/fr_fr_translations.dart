@@ -17,4 +17,6 @@ final Map<String, String> frFR = {
   'loginNow' : "Se connecter",
   'titleLogin' : 'Bonjour, heureux de vous revoir !',
   'titleRegister' : 'Bonjour ! Inscrivez-vous pour commencer',
+  'myTrips' : 'Mes trajets',
+  'themesMode' : "Theme de l'application",
 };
