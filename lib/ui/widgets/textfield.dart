@@ -15,6 +15,7 @@ class CustomTextField extends StatefulWidget {
   final Color? fillColor;
   final Function? validator;
   final bool needConfirmationSuffix;
+  final Color? borderColor;
 
   const CustomTextField({Key? key,
     required this.controller,
@@ -27,7 +28,8 @@ class CustomTextField extends StatefulWidget {
     this.needConfirmationSuffix = false,
     this.fillColor,
     this.password = false,
-    this.validator}) : super(key: key);
+    this.validator,
+    this.borderColor}) : super(key: key);
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -61,7 +63,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       children: [
         widget.labelAbove != "" ? Padding(
           padding: const EdgeInsets.only(bottom:8.0, left:2),
-          child: Text(widget.labelAbove,style: Theme.of(context).textTheme.bodyText1?.copyWith(color: labelAboveColor)),
+          child: Text(widget.labelAbove,style: Theme.of(context).textTheme.titleSmall?.copyWith(color: labelAboveColor)),
         ) : const SizedBox.shrink(),
         TextFormField(
           onChanged: (text) => setState(() => widget.controller.text),
@@ -71,19 +73,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
           validator:  widget.validator != null
               ? (value) => widget.validator!(value)
               : null,
-          style: TextStyle(height: 1, color: Theme.of(context).colorScheme.secondary, fontSize: Theme.of(context).textTheme.bodyText1!.fontSize),
+          style: TextStyle(height: 1, color: Theme.of(context).colorScheme.secondary, fontSize: Theme.of(context).textTheme.titleLarge!.fontSize),
           obscureText: widget.password,
           decoration: InputDecoration(
             hintText: widget.placeholder,
-            hintStyle: Theme.of(context).textTheme.bodyText1?.copyWith(color: widget.fillColor != null ? Colors.black : ColorPalette.grey200),
-            label: widget.label != "" ? Text(widget.label, style: Theme.of(context).textTheme.bodyText2?.copyWith(color: widget.fillColor != null ? Colors.black : labelAboveColor),) : null,
-            contentPadding: const EdgeInsets.symmetric(vertical: 22, horizontal: 17),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(color: ColorPalette.grey200),
+            label: widget.label != "" ? Text(widget.label, style: Theme.of(context).textTheme.titleSmall?.copyWith(color: widget.fillColor != null ? Colors.black : labelAboveColor),) : null,
+            contentPadding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
             filled: true,
             fillColor: widget.fillColor ?? Theme.of(context).focusColor,
             prefixIcon: widget.prefix,
             suffixIcon: widget.needConfirmationSuffix ? getSuffix : null,
             border: OutlineInputBorder(
-              borderSide: const BorderSide(color: ColorPalette.grey200),
+              borderSide: BorderSide(color: widget.borderColor ?? ColorPalette.grey200),
               borderRadius: BorderRadius.circular(widget.circularBorder)
             ),
             errorBorder: OutlineInputBorder(
@@ -95,16 +97,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 borderRadius: BorderRadius.circular(widget.circularBorder)
             ),
             enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: ColorPalette.grey200),
+                borderSide: BorderSide(color: widget.borderColor ?? ColorPalette.grey200),
                 borderRadius: BorderRadius.circular(widget.circularBorder)
             ),
             errorText: widget.needConfirmationSuffix ? Validators.errorText(widget.controller): null,
-            errorStyle: Theme.of(context).textTheme.bodyText1?.copyWith(color: ColorPalette.errorColorText),
+            errorStyle: Theme.of(context).textTheme.titleLarge?.copyWith(color: ColorPalette.errorColorText),
           ),
         ),
         widget.labelUnder != "" ? Padding(
           padding: const EdgeInsets.only(top:8.0),
-          child: Text(widget.labelUnder,style: Theme.of(context).textTheme.bodyText1?.copyWith(color:ColorPalette.grey200)),
+          child: Text(widget.labelUnder,style: Theme.of(context).textTheme.titleLarge?.copyWith(color:ColorPalette.grey200)),
         ) : const SizedBox.shrink(),
       ],
     );

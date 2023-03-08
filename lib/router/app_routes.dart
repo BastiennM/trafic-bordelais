@@ -19,4 +19,5 @@ abstract class _Paths {
   static const DIALOG_POPUP = '/dialog_popup';
   static const LOGIN = '/login';
   static const REGISTER = '/register';
+  static const PROFIL = '/profil';
 }

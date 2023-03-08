@@ -4,6 +4,7 @@ import 'package:trafic_bordeaux/design_system/buttons_view.dart';
 import 'package:trafic_bordeaux/design_system/dialog_popup_view.dart';
 import 'package:trafic_bordeaux/ui/views/home.dart';
 import 'package:trafic_bordeaux/ui/views/login.dart';
+import 'package:trafic_bordeaux/ui/views/profil.dart';
 import 'package:trafic_bordeaux/ui/views/register.dart';
 
 import '../bindings/home_bindings.dart';
@@ -55,6 +56,11 @@ class AppPages {
     GetPage(
       name: _Paths.REGISTER,
       page: () => const Register(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFIL,
+      page: () => const Profil(),
       binding: HomeBinding(),
     ),
   ];

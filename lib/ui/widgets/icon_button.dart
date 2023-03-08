@@ -19,7 +19,7 @@ class CustomIconButton extends StatelessWidget {
     return Ink(
       decoration: ShapeDecoration(
         color: finalBackgroundColor,
-        shape: CircleBorder(side: type == TypeIconButton.outlined ? BorderSide.lerp(BorderSide(color: Theme.of(context).primaryColor), BorderSide(color: Theme.of(context).primaryColor), 3) : BorderSide.none),
+        shape: CircleBorder(side: type == TypeIconButton.outlined ? BorderSide.lerp(BorderSide(color: Theme.of(context).primaryColor), BorderSide(color: Colors.grey[100]!), 3) : BorderSide.none),
       ),
       child: IconButton(
         onPressed: onPressed,
