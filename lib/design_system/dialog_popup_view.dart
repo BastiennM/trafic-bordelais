@@ -27,7 +27,7 @@ class _DialogPopupViewState extends State<DialogPopupView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Confirmation dialog',
-                  style: Theme.of(context).textTheme.bodyText1),
+                  style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(
                 height: 10,
               ),
@@ -46,7 +46,7 @@ class _DialogPopupViewState extends State<DialogPopupView> {
                 height: 40,
               ),
               Text('Simple snackbars',
-                  style: Theme.of(context).textTheme.bodyText1),
+                  style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(
                 height: 10,
               ),

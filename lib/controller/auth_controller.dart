@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -9,12 +8,14 @@ import 'package:trafic_bordeaux/ui/widgets/custom_progress_indicator.dart';
 import 'package:trafic_bordeaux/ui/widgets/loading.dart';
 import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
 
+enum AuthType { register, login }
+
 class AuthController extends GetxController {
   static AuthController to = Get.find();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   Rxn<User> firebaseUser = Rxn<User>();
@@ -56,6 +57,8 @@ class AuthController extends GetxController {
       //Get.offAll(HomeUI());
     }
   }
+
+  bool get isConnected => firebaseUser.value?.uid != null;
 
   // Firebase user one-time fetch
   Future<User> get getUser async => _auth.currentUser!;

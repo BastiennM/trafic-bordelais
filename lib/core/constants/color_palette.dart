@@ -58,4 +58,10 @@ class ColorPalette {
 
   static const Color informationalColorBackground = Color(0xFFbbdefb);
   static const Color informationalColorText = Color(0xFF1664c0);
+
+  static const Color inputBackgroundColor = Color(0xFFF0F0F0);
+  static const Color inputBorderColor = Color(0xFFDFE4EE);
+
+  static const Color ctaButton = Color(0xFF35C2C1);
+  static const Color borderIconButton = Color(0xFFE8ECF4);
 }
