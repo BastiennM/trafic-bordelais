@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import '../../core/app_export.dart';
 import '../../core/constants/color_palette.dart';
 import 'custom_progress_indicator.dart';
@@ -9,6 +11,7 @@ enum TypeButton { error, warning, success, informational, initial}
 class CustomButton extends StatelessWidget {
   final String label;
   final bool loading;
+  final bool needArrowIcon;
   final VoidCallback onPressed;
   final bool disabled;
   final bool isKeyboardVisible;
@@ -27,6 +30,7 @@ class CustomButton extends StatelessWidget {
       this.icon,
       this.color,
       this.loading = false,
+      this.needArrowIcon = false,
       this.disabled = false,
       this.needIcon = false,
       this.isKeyboardVisible = false,
@@ -38,35 +42,53 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CustomProgressIndicator customProgressIndicator = CustomProgressIndicator(context,valueColor: fill ? Colors.white : getColor);
+    ThemeModeController themeModeController = Get.put(ThemeModeController());
 
     return Container(
       decoration: BoxDecoration(
         border: !fill ? Border.all(color: getColor) : null,
-        borderRadius: BorderRadius.circular(9),
+        borderRadius: BorderRadius.circular(28),
       ),
       child: CupertinoButton(
+        padding: const EdgeInsets.all(20),
           onPressed: !disabled && !loading ? onPressed : null,
           color: fill ? getColor : Colors.transparent,
           disabledColor: loading && fill
               ? getColor
               : !fill
                   ? Colors.transparent
-                  : ColorPalette.grey50,
+                  : ThemeModeController().isDark.value ? ColorPalette.ctaButton : getColor,
           child: Container(
             height: height,
-            width: width,
-            alignment: Alignment.center,
+            width: double.infinity,
             child: loading
                 ? customProgressIndicator.show()
                 : !needIcon
                     ? getText(context)
                     : Row(
                         mainAxisAlignment: MainAxisAlignment
-                            .center, //Center Row contents horizontally,
+                            .spaceBetween, //Center Row contents horizontally,
                         children: [
-                            getIcon,
-                            const SizedBox(width: 6),
-                            getText(context),
+                          Row(
+                            children: [
+                              getIcon,
+                              const SizedBox(width: 14),
+                              getText(context),
+                            ],
+                          ),
+
+                          Visibility(
+                            visible: needArrowIcon,
+                            child: Row(
+                              children: [
+                                Icon(Icons.arrow_forward_ios,  color: disabled ? themeModeController.isDark.value
+                                    ?  Colors.white.withOpacity(0.5) : ColorPalette.ctaButton.withOpacity(0.5) :
+                                themeModeController.isDark.value
+                                    ? Colors.white
+                                    : Colors.black, size: 20),
+                              ],
+                            ),
+                          )
                           ]),
           )),
     );

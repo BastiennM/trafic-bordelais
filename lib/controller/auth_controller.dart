@@ -19,6 +19,7 @@ class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   Rxn<User> firebaseUser = Rxn<User>();
+  RxBool isConnected = false.obs;
   Rxn<UserModel> firestoreUser = Rxn<UserModel>();
   final RxBool admin = false.obs;
   CustomProgressIndicator customProgressIndicator = CustomProgressIndicator(Get.context);
@@ -44,21 +45,10 @@ class AuthController extends GetxController {
     //get user data from firestore
     if (_firebaseUser?.uid != null) {
       firestoreUser.bindStream(streamFirestoreUser());
+      isConnected.value = true;
       update();
     }
-
-    if (_firebaseUser == null) {
-      print('Send to signin');
-      //TODO : Add sign in screen
-      //Get.offAll(SignInUI());
-    } else {
-      print("send to register");
-      //TODO: Add register screen
-      //Get.offAll(HomeUI());
-    }
   }
-
-  bool get isConnected => firebaseUser.value?.uid != null;
 
   // Firebase user one-time fetch
   Future<User> get getUser async => _auth.currentUser!;
@@ -91,9 +81,9 @@ class AuthController extends GetxController {
           password: passwordController.text.trim());
       emailController.clear();
       passwordController.clear();
-      customProgressIndicator.close();
+      print(isConnected);
+      Get.toNamed('/home');
     } catch (error) {
-      customProgressIndicator.close();
       CustomSnackbar().buildSnackbar('Erreur', 'Erreur lors du login', TypeMessage.error);
     }
   }
@@ -118,6 +108,7 @@ class AuthController extends GetxController {
         );
         //create the user in firestore
         _createUserFirestore(newUser, result.user!);
+        signInWithEmailAndPassword(context);
         emailController.clear();
         passwordController.clear();
         hideLoadingIndicator();
@@ -139,6 +130,9 @@ class AuthController extends GetxController {
     nameController.clear();
     emailController.clear();
     passwordController.clear();
+    isConnected.value = false;
     return _auth.signOut();
   }
+
+
 }
