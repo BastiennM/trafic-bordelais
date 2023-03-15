@@ -19,4 +19,7 @@ final Map<String, String> enUs = {
   'titleRegister' : 'Hello! Register to get started',
   'myTrips' : 'My trips',
   'themesMode' : 'Application theme',
+  'isConnectedIndication' : ' You are not yet connected',
+  'isConnectedIndicationTrip' : "Login to access your trips",
+  'disconnect' : 'Disconnect',
 };
