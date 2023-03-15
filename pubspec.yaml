@@ -22,8 +22,11 @@ dependencies:
   cloud_firestore: ^4.3.1
   firebase_core: ^2.5.0
   google_fonts: ^2.1.0
+  flutter_map: ^3.1.0
+  latlong2: ^0.8.1
+  geolocator: ^9.0.2
+  carousel_slider: ^4.2.1
   font_awesome_flutter: ^10.4.0
-
 
   cupertino_icons: ^1.0.2
 
