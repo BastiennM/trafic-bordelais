@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trafic_bordeaux/ui/widgets/map.dart';
 import 'package:trafic_bordeaux/ui/widgets/textfield.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import '../../controller/home_controller.dart';
 import '../../core/constants/color_palette.dart';
 import '../widgets/icon_button.dart';
