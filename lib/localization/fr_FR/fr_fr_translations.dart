@@ -14,9 +14,12 @@ final Map<String, String> frFR = {
   'alreadyRegistered' : 'Vous avez déjà un compte ?',
   'newUser' : "Vous n'etes pas encore inscrit ?",
   'registerNow' : "S'inscrire",
-  'loginNow' : "Se connecter",
+  'loginNow' : "Se connecter maintenant",
   'titleLogin' : 'Bonjour, heureux de vous revoir !',
   'titleRegister' : 'Bonjour ! Inscrivez-vous pour commencer',
   'myTrips' : 'Mes trajets',
   'themesMode' : "Theme de l'application",
+  'isConnectedIndication' : "Vous n'êtes pas encore connecté",
+  'isConnectedIndicationTrip' : "Connectez-vous pour accèder à vos trajets ",
+  'disconnect' : 'Se déconnecter',
 };
