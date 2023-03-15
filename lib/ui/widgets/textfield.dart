@@ -73,13 +73,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
           validator:  widget.validator != null
               ? (value) => widget.validator!(value)
               : null,
-          style: TextStyle(height: 1, color: Theme.of(context).colorScheme.secondary, fontSize: Theme.of(context).textTheme.titleLarge!.fontSize),
+          style: TextStyle(height: 1, color: Theme.of(context).colorScheme.secondary, fontSize: Theme.of(context).textTheme.titleSmall!.fontSize),
           obscureText: widget.password,
           decoration: InputDecoration(
             hintText: widget.placeholder,
             hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(color: ColorPalette.grey200),
-            label: widget.label != "" ? Text(widget.label, style: Theme.of(context).textTheme.titleSmall?.copyWith(color: widget.fillColor != null ? Colors.black : labelAboveColor),) : null,
-            contentPadding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
+            label: widget.label != "" ? Text(widget.label, style: Theme.of(context).textTheme.titleSmall?.copyWith(color: widget.fillColor != null ? Colors.black : labelAboveColor, fontSize: 12),) : null,
+            contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             filled: true,
             fillColor: widget.fillColor ?? Theme.of(context).focusColor,
             prefixIcon: widget.prefix,

@@ -11,11 +11,10 @@ class MapWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     HomeController _homeController = Get.put(HomeController());
 
-    if (!_homeController.isLoadingPosition.value) {
-      return Obx(() => FlutterMap(
+      return Obx(() => !_homeController.isLoadingPosition.value ? FlutterMap(
             options: MapOptions(
               center: LatLng(_homeController.currentPosition.value!.latitude, _homeController.currentPosition.value!.longitude),
-              zoom: 9.2,
+              zoom: 16,
             ),
             nonRotatedChildren: [
               AttributionWidget.defaultWidget(
@@ -29,9 +28,6 @@ class MapWidget extends StatelessWidget {
                 userAgentPackageName: 'com.example.app',
               ),
             ],
-          ));
-    } else {
-      return const Center(child: Text('sss'));
-    }
+          ) : const Center(child: CircularProgressIndicator(color: Colors.black,)));
   }
 }
