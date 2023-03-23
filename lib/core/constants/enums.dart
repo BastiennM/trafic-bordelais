@@ -1,0 +1,1 @@
+enum EtatVoie { INCONNU, FLUIDE, EMBOUTEILLE, DENSE }

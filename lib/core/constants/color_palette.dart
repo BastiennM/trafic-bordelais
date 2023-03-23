@@ -42,6 +42,7 @@ class ColorPalette {
   static const Color blue50 = Color(0xFF009EEB);
   static const Color yellow50 = Color(0xFFFFD55F);
   static const Color grey50 = Color(0xFFF2F2F2);
+  static const Color greyBack = Color(0xFF3A3B3C);
   static const Color grey100 = Color(0xFFDCDCDC);
   static const Color grey200 = Color(0xFFA6A6A6);
   static const Color white = Color(0xFFFAFAFA);
@@ -64,4 +65,6 @@ class ColorPalette {
 
   static const Color ctaButton = Color(0xFF35C2C1);
   static const Color borderIconButton = Color(0xFFE8ECF4);
+
+  static const Color darkGrey300 = Color(0xFF383838);
 }
