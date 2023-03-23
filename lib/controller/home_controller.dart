@@ -17,7 +17,6 @@ class HomeController extends GetxController {
   final Rx<Position?> currentPosition = Rx(null);
   final RxBool isLoadingPosition = true.obs;
   final Rx<TextEditingController> placeSearchController = TextEditingController().obs;
-  final Rx<List<Widget>> itemsList = Rx([Container(width:100,color:Colors.red,child: const Text('a')),Container(width:100,color:Colors.green,child: const Text('a'))]);
   final FocusNode focus = FocusNode();
   final RxBool startSearching = false.obs;
   final txtList = TextEditingController();
