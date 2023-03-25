@@ -37,6 +37,9 @@ class MapWidget extends StatelessWidget {
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 userAgentPackageName: 'com.example.app',
               ),
+              Obx(() => MarkerLayer(
+                markers: homeController.listMarker.value,
+              )),
               Obx(() => (
                   PolylineLayer(
                       polylines: homeController.polylineToDisplay.value

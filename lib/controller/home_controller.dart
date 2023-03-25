@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -7,24 +6,28 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:trafic_bordeaux/core/constants/constants.dart';
 import 'package:trafic_bordeaux/core/constants/enums.dart';
 import 'package:trafic_bordeaux/models/address_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:trafic_bordeaux/models/search_address_model.dart';
 
 class HomeController extends GetxController {
   final client = http.Client();
   final RxString homeText = "Home text".obs;
   final Rx<Position?> currentPosition = Rx(null);
   final RxBool isLoadingPosition = true.obs;
-  final Rx<TextEditingController> placeSearchController = TextEditingController().obs;
+  final RxBool emptyAfterSearch = false.obs;
   final FocusNode focus = FocusNode();
   final RxBool startSearching = false.obs;
-  final txtList = TextEditingController();
-  RxString controllerText = ''.obs;
+  final placeSearchController = TextEditingController();
+  RxString searchString = ''.obs;
   final addressListFull = <AddressModel>[].obs;
+  final addressListSearch = <SearchAdressModel>[].obs;
   final polylineToDisplay = <Polyline>[].obs;
   MapController mapController = MapController();
   final RxDouble zoom = 15.0.obs;
+  final listMarker = <Marker>[].obs;
 
   Future<Position> determinePosition() async {
     bool serviceEnabled;
@@ -168,19 +171,46 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<void> fetchAdresseFromSearch() async {
+    try {
+      var response = await client.get(Uri.parse('$baseUriApiGouv?q=${searchString.value}&postcode=33000'));
+
+      var allData = json.decode(response.body) as Map<dynamic, dynamic>;
+
+      for (var element in allData['features']) {
+        addressListSearch.add(SearchAdressModel.fromMap(element));
+      }
+
+      startSearching.value = false;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void emptySearch(){
+    searchString.value = "";
+    addressListSearch.value.clear();
+    listMarker.value.clear();
+    placeSearchController.text = "";
+  }
+
   @override
   onInit() async{
     super.onInit();
     await fetchAllData();
     await createPolygones();
     currentPosition.value = await determinePosition();
-    txtList.addListener(() {
-      controllerText.value = txtList.text;
+
+    placeSearchController.addListener(() {
+      searchString.value = placeSearchController.text;
     });
-    debounce(controllerText, (_) {
-      if(controllerText.value.isNotEmpty) startSearching.value = true;
-      if(controllerText.value.isEmpty) startSearching.value = false;
-      print("debouce$_");
+
+    debounce(searchString, (_) async {
+      addressListSearch.value.clear();
+      if(searchString.value.isNotEmpty) startSearching.value = true;
+      if(searchString.value.isEmpty) startSearching.value = false;
+      if(searchString.value.length > 2) await fetchAdresseFromSearch();
+      if(addressListSearch.value.isEmpty) emptyAfterSearch.value = true;
     }, time: const Duration(seconds: 1));
   }
 }

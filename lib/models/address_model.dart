@@ -1,5 +1,4 @@
 import 'package:latlong2/latlong.dart';
-import 'package:trafic_bordeaux/core/constants/enums.dart';
 
 class AddressModel {
   final int id;

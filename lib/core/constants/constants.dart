@@ -1,0 +1,1 @@
+const baseUriApiGouv = "https://api-adresse.data.gouv.fr/search/";
