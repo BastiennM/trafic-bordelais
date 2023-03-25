@@ -28,6 +28,8 @@ class HomeController extends GetxController {
   MapController mapController = MapController();
   final RxDouble zoom = 15.0.obs;
   final listMarker = <Marker>[].obs;
+  final currentRoadState = EtatVoie.FLUIDE.obs;
+  final List<EtatVoie> visibleStateRoadList = [];
 
   Future<Position> determinePosition() async {
     bool serviceEnabled;
@@ -57,7 +59,10 @@ class HomeController extends GetxController {
     return position;
   }
 
-  Future<void> createPolygones() async {
+  Future<void> createPolylines() async {
+
+    visibleStateRoadList.clear(); //Resetting array values
+
     for (int i = 0; i < addressListFull.length; i++) {
       List<LatLng> matricesCoordonnees = [];
 
@@ -66,6 +71,9 @@ class HomeController extends GetxController {
       });
 
       List<LatLng> polyligneCoordonnees = [];
+      EtatVoie etatVoie = matchEtatWithEnum(addressListFull[i].etat);
+      visibleStateRoadList.add(etatVoie);
+
       for (int j = 0; j < matricesCoordonnees.length; j++) {
         polyligneCoordonnees.add(matricesCoordonnees[j]);
       }
@@ -77,9 +85,17 @@ class HomeController extends GetxController {
       );
       polylineToDisplay.add(polyline);
     }
+
+    updateStateRoad(getMostFrequent(visibleStateRoadList));
+  }
+
+  void updateStateRoad(EtatVoie etatVoie) {
+    currentRoadState.value = etatVoie;
   }
 
   void updatePolylines() {
+    visibleStateRoadList.clear(); //Resetting array values
+
     // Récupérez la zone visible de la carte
     LatLngBounds? visibleBounds = mapController.bounds;
 
@@ -99,7 +115,10 @@ class HomeController extends GetxController {
       bool visible = false;
       for (int j = 0; j < matricesCoordonnees.length; j++) {
         LatLng point = matricesCoordonnees[j];
+        EtatVoie etatVoie = matchEtatWithEnum(addressListFull[i].etat);
+
         if (visibleBounds!.contains(point)) {
+          visibleStateRoadList.add(etatVoie);
           visible = true;
           break;
         }
@@ -120,9 +139,29 @@ class HomeController extends GetxController {
         polylineToDisplay.value.add(polyline);
       }
     }
+
+    updateStateRoad(getMostFrequent(visibleStateRoadList));
   }
 
-  Future<void> fetchAllData() async {
+  EtatVoie getMostFrequent(List<EtatVoie> list) { //Permet de récupérer l'état le plus fréquent dans une liste d'état donnée (visible à l'écran)
+    Map<EtatVoie, int> countMap = {};
+    int maxCount = 0;
+    EtatVoie? mostFrequent;
+
+    for (EtatVoie e in list) {
+      countMap[e] = (countMap[e] ?? 0) + 1;
+
+      if (countMap[e]! > maxCount) {
+        maxCount = countMap[e]!;
+        mostFrequent = e;
+      }
+    }
+
+    return mostFrequent!;
+  }
+
+
+    Future<void> fetchAllData() async {
     try {
       var response = await client.get(Uri.parse('https://data.bordeaux-metropole.fr/geojson?key=15CDJLPSTW&typename=ci_trafi_l&attributes=%5B%22gid%22,%22typevoie%22,%22etat%22,%22mdate%22,%22geom%22%5D'));
 
@@ -198,7 +237,7 @@ class HomeController extends GetxController {
   onInit() async{
     super.onInit();
     await fetchAllData();
-    await createPolygones();
+    await createPolylines();
     currentPosition.value = await determinePosition();
 
     placeSearchController.addListener(() {
