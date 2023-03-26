@@ -7,6 +7,7 @@ import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import 'package:trafic_bordeaux/core/constants/enums.dart';
 import 'package:trafic_bordeaux/models/search_address_model.dart';
 import 'package:trafic_bordeaux/ui/widgets/map.dart';
+import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
 import 'package:trafic_bordeaux/ui/widgets/state_road_indicator.dart';
 import 'package:trafic_bordeaux/ui/widgets/textfield.dart';
 import '../../controller/home_controller.dart';
@@ -23,6 +24,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   ThemeModeController themeModeController = Get.put(ThemeModeController());
   HomeController homeController = Get.put(HomeController());
+
+  buildSnackbar(){
+    return CustomSnackbar().buildSnackbar('Etat de la zone actuelle', 'La zone est ${homeController.currentRoadState.value.name}', StateRoadIndicator().getTypeMessage(homeController.currentRoadState.value), position: SnackPosition.TOP, duration: 6);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,8 +138,7 @@ class _HomeState extends State<Home> {
         top: 60,
         right: 15,
         child: InkWell(
-            onTap: () =>
-            homeController.currentRoadState.value = EtatVoie.FLUIDE,
+            onTap: () => buildSnackbar(),
             child: StateRoadIndicator()
                 .getRoadIndicator(homeController.currentRoadState.value),
         ),
@@ -232,6 +236,7 @@ class _HomeState extends State<Home> {
                           size: 28,
                         );
                       }));
+                  buildSnackbar();
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

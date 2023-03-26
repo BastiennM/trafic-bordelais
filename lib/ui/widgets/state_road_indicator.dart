@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trafic_bordeaux/core/constants/constants.dart';
 import 'package:trafic_bordeaux/core/constants/enums.dart';
+import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
 
 import '../../core/constants/color_palette.dart';
 
@@ -47,5 +48,20 @@ class StateRoadIndicator {
     colorIndicator = possibilities[currentEtat] ?? ColorPalette.grey100;
 
     return colorIndicator;
+  }
+
+  TypeMessage getTypeMessage(EtatVoie currentEtat) {
+    TypeMessage typeMessage;
+
+    Map possibilities = {
+      EtatVoie.INCONNU: TypeMessage.informational,
+      EtatVoie.DENSE: TypeMessage.warning,
+      EtatVoie.EMBOUTEILLE: TypeMessage.error,
+      EtatVoie.FLUIDE: TypeMessage.success,
+    };
+
+    typeMessage = possibilities[currentEtat] ?? TypeMessage.informational;
+
+    return typeMessage;
   }
 }

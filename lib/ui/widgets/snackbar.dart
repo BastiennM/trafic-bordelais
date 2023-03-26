@@ -6,16 +6,17 @@ enum TypeMessage {error, success, warning, informational}
 
 class CustomSnackbar{
 
-  SnackbarController buildSnackbar(String title, String message, TypeMessage type) {
+  SnackbarController buildSnackbar(String title, String message, TypeMessage type, {SnackPosition position = SnackPosition.BOTTOM, int duration = 3}) {
     return Get.snackbar(
         title, message,
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: position,
         backgroundColor: getBackgroundColor(type),
         borderColor: getTextColor(type),
         borderWidth: 2,
         colorText: getTextColor(type),
         icon: Icon(getIcon(type), color: getTextColor(type)),
-        shouldIconPulse: false
+        shouldIconPulse: true,
+        duration: Duration(seconds: duration)
     );
   }
 
