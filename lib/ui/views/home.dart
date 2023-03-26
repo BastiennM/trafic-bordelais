@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
-import 'package:trafic_bordeaux/core/constants/enums.dart';
+import 'package:trafic_bordeaux/controller/timer_controller.dart';
 import 'package:trafic_bordeaux/models/search_address_model.dart';
 import 'package:trafic_bordeaux/ui/widgets/map.dart';
 import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
@@ -23,10 +23,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ThemeModeController themeModeController = Get.put(ThemeModeController());
+  TimerController timerController = Get.put(TimerController());
   HomeController homeController = Get.put(HomeController());
 
-  buildSnackbar(){
-    return CustomSnackbar().buildSnackbar('Etat de la zone actuelle', 'La zone est ${homeController.currentRoadState.value.name}', StateRoadIndicator().getTypeMessage(homeController.currentRoadState.value), position: SnackPosition.TOP, duration: 6);
+  buildSnackbar() {
+    return CustomSnackbar().buildSnackbar(
+        'Etat de la zone actuelle',
+        'La zone est ${homeController.currentRoadState.value.name}',
+        StateRoadIndicator()
+            .getTypeMessage(homeController.currentRoadState.value),
+        position: SnackPosition.TOP,
+        duration: 6);
   }
 
   @override
@@ -39,7 +46,8 @@ class _HomeState extends State<Home> {
             const MapWidget(),
             getProfileButton(),
             getBottomContainer(),
-            getRoadStateIndicator()
+            getRoadStateIndicator(),
+            getRefreshMapWidget()
           ],
         ),
       ),
@@ -47,8 +55,8 @@ class _HomeState extends State<Home> {
   }
 
   Widget getProfileButton() {
-    return Obx(() =>
-      Visibility(
+    return Obx(
+      () => Visibility(
         visible: !homeController.isLoadingPosition.value,
         child: Positioned(
           top: 60,
@@ -67,8 +75,9 @@ class _HomeState extends State<Home> {
               },
               icon: Icon(
                 Icons.person,
-                color:
-                    themeModeController.isDark.value ? Colors.black : Colors.white,
+                color: themeModeController.isDark.value
+                    ? Colors.black
+                    : Colors.white,
               ),
               backgroundColor: Colors.transparent,
             ),
@@ -82,7 +91,7 @@ class _HomeState extends State<Home> {
     return Positioned(
       bottom: 0,
       child: Container(
-        padding: EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(18.0),
         width: MediaQuery.of(context).size.width,
         height: 200,
         decoration: BoxDecoration(
@@ -130,20 +139,20 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget getRoadStateIndicator(){
+  Widget getRoadStateIndicator() {
     return Obx(
-          () => Visibility(
-            visible: !homeController.isLoadingPosition.value,
-            child: Positioned(
-        top: 60,
-        right: 15,
-        child: InkWell(
+      () => Visibility(
+        visible: !homeController.isLoadingPosition.value,
+        child: Positioned(
+          top: 60,
+          right: 15,
+          child: InkWell(
             onTap: () => buildSnackbar(),
             child: StateRoadIndicator()
                 .getRoadIndicator(homeController.currentRoadState.value),
+          ),
         ),
       ),
-          ),
     );
   }
 
@@ -292,5 +301,53 @@ class _HomeState extends State<Home> {
     }
 
     return widgetToReturn;
+  }
+
+  Widget getRefreshMapWidget() {
+    return Positioned(
+      bottom: 200,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.0),
+                      border: Border.all(color:ColorPalette.grey100)
+                  ),
+                  child: Row(
+
+                    children: [
+                      const Text('Rafraichissement des données dans :'),
+                      const SizedBox(width:5),
+                      Obx(() => Text(timerController.getFormattedTime(),style: const TextStyle(fontWeight: FontWeight.bold)))
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 6),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color:ColorPalette.grey100)
+              ),
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                  onTap: () => timerController.resetTimer(),
+                    child: const Icon(Icons.refresh, color: ColorPalette.grey200)
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

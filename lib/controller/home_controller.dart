@@ -169,6 +169,7 @@ class HomeController extends GetxController {
       for (var element in allData['features']) {
         addressListFull.add(AddressModel.fromMap(element));
       }
+
       } catch (e){
       print(e);
     }
@@ -218,8 +219,6 @@ class HomeController extends GetxController {
       for (var element in allData['features']) {
         if(isInSquare(element['geometry']['coordinates'][0], element['geometry']['coordinates'][1])){
           addressListSearch.add(SearchAdressModel.fromMap(element));
-        } else {
-          print("pas dans les limites");
         }
       }
 
@@ -239,6 +238,7 @@ class HomeController extends GetxController {
     listMarker.value.clear();
     placeSearchController.text = "";
   }
+
 
   @override
   onInit() async{
