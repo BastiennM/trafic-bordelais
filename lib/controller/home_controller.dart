@@ -80,7 +80,7 @@ class HomeController extends GetxController {
 
       Polyline polyline = Polyline(
         points: polyligneCoordonnees,
-        strokeWidth: 6,
+        strokeWidth: 5,
         color: getColorByEtat(addressListFull.value[i].etat),
       );
       polylineToDisplay.add(polyline);
@@ -132,7 +132,7 @@ class HomeController extends GetxController {
         }
         Polyline polyline = Polyline(
           points: polyligneCoordonnees,
-          strokeWidth: 6,
+          strokeWidth: 5,
           color: getColorByEtat(addressListFull.value[i].etat),
         );
 
@@ -160,8 +160,7 @@ class HomeController extends GetxController {
     return mostFrequent!;
   }
 
-
-    Future<void> fetchAllData() async {
+  Future<void> fetchAllData() async {
     try {
       var response = await client.get(Uri.parse('https://data.bordeaux-metropole.fr/geojson?key=15CDJLPSTW&typename=ci_trafi_l&attributes=%5B%22gid%22,%22typevoie%22,%22etat%22,%22mdate%22,%22geom%22%5D'));
 
@@ -217,13 +216,21 @@ class HomeController extends GetxController {
       var allData = json.decode(response.body) as Map<dynamic, dynamic>;
 
       for (var element in allData['features']) {
-        addressListSearch.add(SearchAdressModel.fromMap(element));
+        if(isInSquare(element['geometry']['coordinates'][0], element['geometry']['coordinates'][1])){
+          addressListSearch.add(SearchAdressModel.fromMap(element));
+        } else {
+          print("pas dans les limites");
+        }
       }
 
       startSearching.value = false;
     } catch (e) {
       print(e);
     }
+  }
+
+  bool isInSquare(double lon, double lat) { //Here to check if the searched address is in area of bordeaux API response
+    return lon >= -0.8835 && lon <= -0.44377 && lat >= 44.730085 && lat <= 45.04764;
   }
 
   void emptySearch(){
