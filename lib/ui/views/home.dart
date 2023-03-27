@@ -156,63 +156,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget getFavoritePlacesItem(IconData icon) {
-    return Container(
-        width: 174,
-        height: 80,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: ColorPalette.grey100),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Row(
-            children: [
-              FaIcon(
-                icon,
-                color: Colors.black,
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Maison',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      '31 rue des champs',
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ));
-  }
-
-  Widget getFavoritesPlaces() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        getFavoritePlacesItem(FontAwesomeIcons.house),
-        getFavoritePlacesItem(FontAwesomeIcons.building)
-      ],
-    );
-  }
-
   Widget getListResultSearch() {
     return MediaQuery.removePadding(
       context: Get.context!,
@@ -296,7 +239,7 @@ class _HomeState extends State<Home> {
         widgetToReturn = getListResultSearch();
       } else if (homeController.addressListSearch.value.isEmpty &&
           homeController.searchString.value == "") {
-        widgetToReturn = getFavoritesPlaces();
+        widgetToReturn = const Center(child: Text('Commencez à rechercher une adresse !'));
       }
     }
 
@@ -339,9 +282,10 @@ class _HomeState extends State<Home> {
                     border: Border.all(color:ColorPalette.grey100)
               ),
                 padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: () => timerController.resetTimer(),
-                    child: const Icon(Icons.refresh, color: ColorPalette.grey200)
+                child: Obx(()=> InkWell(
+                    onTap: () => timerController.canReset.value ? timerController.resetTimer() : null,
+                      child: Icon(Icons.refresh, color: timerController.canReset.value ? Colors.black : ColorPalette.grey200)
+                  ),
                 ),
               )
             ],

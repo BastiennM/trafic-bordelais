@@ -3,10 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:trafic_bordeaux/models/frequent_itinerary.dart';
 import 'package:trafic_bordeaux/models/user_model.dart';
-import 'package:trafic_bordeaux/ui/widgets/custom_progress_indicator.dart';
-import 'package:trafic_bordeaux/ui/widgets/loading.dart';
 import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
 
 enum AuthType { register, login }

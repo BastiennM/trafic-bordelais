@@ -146,7 +146,7 @@ class HomeController extends GetxController {
   EtatVoie getMostFrequent(List<EtatVoie> list) { //Permet de récupérer l'état le plus fréquent dans une liste d'état donnée (visible à l'écran)
     Map<EtatVoie, int> countMap = {};
     int maxCount = 0;
-    EtatVoie? mostFrequent;
+    EtatVoie mostFrequent = EtatVoie.INCONNU;
 
     for (EtatVoie e in list) {
       countMap[e] = (countMap[e] ?? 0) + 1;
@@ -157,7 +157,7 @@ class HomeController extends GetxController {
       }
     }
 
-    return mostFrequent!;
+    return mostFrequent;
   }
 
   Future<void> fetchAllData() async {

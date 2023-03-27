@@ -9,13 +9,14 @@ import '../../core/constants/color_palette.dart';
 class StateRoadIndicator {
   Widget getRoadIndicator(EtatVoie currentEtat) {
     return Container(
+      width:50,
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           color: Colors.white,
           border: Border.all(color: getColorIndicator(currentEtat))
         ),
-        child: getSvgIndicator(currentEtat)
+        child: Center(child: getSvgIndicator(currentEtat))
     );
   }
 
@@ -23,7 +24,7 @@ class StateRoadIndicator {
     Widget svgIndicator;
 
     Map possibilities = {
-      EtatVoie.INCONNU: const Text('?', style: TextStyle(fontSize: 28)),
+      EtatVoie.INCONNU: const Text('?', style: TextStyle(fontSize: 20)),
       EtatVoie.DENSE: SvgPicture.string(orangeCarState),
       EtatVoie.EMBOUTEILLE: SvgPicture.string(redTurtleState),
       EtatVoie.FLUIDE: SvgPicture.string(greenRabbitState),
@@ -39,7 +40,7 @@ class StateRoadIndicator {
     Color colorIndicator;
 
     Map possibilities = {
-      EtatVoie.INCONNU: ColorPalette.grey100,
+      EtatVoie.INCONNU: ColorPalette.grey200,
       EtatVoie.DENSE: ColorPalette.orangeRoadState,
       EtatVoie.EMBOUTEILLE: ColorPalette.redRoadState,
       EtatVoie.FLUIDE: ColorPalette.greenRoadState,

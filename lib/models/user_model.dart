@@ -1,12 +1,9 @@
 //User Model
-import 'package:trafic_bordeaux/models/frequent_itinerary.dart';
 
 class UserModel {
   final String uid;
   final String email;
   final String name;
-  FrequentItinerary? firstFrequentItinerary;
-  FrequentItinerary? secondFrequentItinerary;
 
   UserModel(
       {required this.uid,
@@ -23,5 +20,5 @@ class UserModel {
   }
 
   Map<String, dynamic> toJson() =>
-      {"uid": uid, "email": email, "name": name, "firstFrequentItinerary": firstFrequentItinerary, "secondFrequentItinerary": secondFrequentItinerary};
+      {"uid": uid, "email": email, "name": name};
 }

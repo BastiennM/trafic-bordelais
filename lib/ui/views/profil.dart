@@ -33,29 +33,7 @@ class Profil extends StatelessWidget {
                 authController.isConnected.value ? '' : 'isConnectedIndication'.tr,
                 style: Theme.of(context).textTheme.titleSmall),
             ),
-            SizedBox(height: 70),
-            Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Container(
-
-              child: CustomButton(
-                height: 30,
-                label: 'myTrips'.tr,
-                color: themeModeController.isDark.value
-                    ? authController.isConnected.value ? Colors.black : Colors.black.withOpacity(0.5)
-                    : authController.isConnected.value ? ColorPalette.ctaButton : ColorPalette.ctaButton.withOpacity(0.5),
-                onPressed: () => {},
-                width: 300,
-                disabled: !authController.isConnected.value,
-                icon: FaIcon(FontAwesomeIcons.car,color: themeModeController.isDark.value
-                    ? authController.isConnected.value ? Colors.black : Colors.white.withOpacity(0.5)
-                    : authController.isConnected.value ? ColorPalette.ctaButton : ColorPalette.ctaButton.withOpacity(0.5), size: 20),
-                needIcon: true,
-                needArrowIcon: true,
-              ),
-            ),
-            ),
-            Visibility(child: Text('isConnectedIndicationTrip'.tr, style: Theme.of(context).textTheme.titleSmall), visible: !authController.isConnected.value,),
+            const SizedBox(height: 40),
             Padding(
             padding: const EdgeInsets.only(top: 20),
             child: CustomButton(
