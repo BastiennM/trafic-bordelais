@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:trafic_bordeaux/controller/home_controller.dart';
 
 class TimerController extends GetxController {
-  HomeController homeController = Get.put(HomeController());
+  HomeController homeController = Get.find<HomeController>();
 
   var timeLeft = 300.obs; // 5 minutes = 300 seconds
   var resetCount = 0; // nombre de fois que resetTimer a été appelé

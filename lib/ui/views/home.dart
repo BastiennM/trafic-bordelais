@@ -24,7 +24,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   ThemeModeController themeModeController = Get.put(ThemeModeController());
   TimerController timerController = Get.put(TimerController());
-  HomeController homeController = Get.put(HomeController());
+  HomeController homeController = Get.find<HomeController>();
 
   buildSnackbar() {
     return CustomSnackbar().buildSnackbar(

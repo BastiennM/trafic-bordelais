@@ -9,7 +9,7 @@ class MapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeController homeController = Get.put(HomeController());
+    HomeController homeController = Get.find<HomeController>();
 
       return Obx(() => !homeController.isLoadingPosition.value ? FlutterMap(
         mapController: homeController.mapController,
