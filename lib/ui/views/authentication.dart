@@ -14,8 +14,9 @@ class Authentication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthController authController = Get.put(AuthController());
-    ThemeModeController themeModeController = Get.put(ThemeModeController());
+    AuthController authController = Get.find<AuthController>();
+    ThemeModeController themeModeController = Get.find<ThemeModeController>();
+
     return Scaffold(
       body:Container(
         padding: const EdgeInsets.all(20),
