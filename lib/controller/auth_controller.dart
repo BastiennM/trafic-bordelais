@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:trafic_bordeaux/models/frequent_itinerary.dart';
 import 'package:trafic_bordeaux/models/user_model.dart';
 import 'package:trafic_bordeaux/ui/widgets/custom_progress_indicator.dart';
 import 'package:trafic_bordeaux/ui/widgets/loading.dart';
@@ -22,7 +23,6 @@ class AuthController extends GetxController {
   RxBool isConnected = false.obs;
   Rxn<UserModel> firestoreUser = Rxn<UserModel>();
   final RxBool admin = false.obs;
-  CustomProgressIndicator customProgressIndicator = CustomProgressIndicator(Get.context);
   @override
   void onReady() async {
     //run every time auth state changes
@@ -74,7 +74,6 @@ class AuthController extends GetxController {
 
   //Method to handle user sign in using email and password
   signInWithEmailAndPassword(BuildContext context) async {
-    customProgressIndicator.show();
     try {
       await _auth.signInWithEmailAndPassword(
           email: emailController.text.trim(),
@@ -90,8 +89,6 @@ class AuthController extends GetxController {
 
   // User registration using email and password
   registerWithEmailAndPassword(BuildContext context) async {
-    showLoadingIndicator();
-    customProgressIndicator.show();
     try {
       await _auth
           .createUserWithEmailAndPassword(
@@ -104,17 +101,17 @@ class AuthController extends GetxController {
         UserModel newUser = UserModel(
             uid: result.user!.uid,
             email: result.user!.email!,
-            name: nameController.text
+            name: nameController.text,
         );
+
+        print(newUser);
         //create the user in firestore
         _createUserFirestore(newUser, result.user!);
         signInWithEmailAndPassword(context);
         emailController.clear();
         passwordController.clear();
-        hideLoadingIndicator();
       });
     } on FirebaseAuthException catch (error) {
-      hideLoadingIndicator();
       CustomSnackbar().buildSnackbar('Erreur', error.message ?? "", TypeMessage.error);
     }
   }
