@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trafic_bordeaux/controller/auth_controller.dart';
+import 'package:trafic_bordeaux/core/constants/enums.dart';
 
 import 'authentication.dart';
 

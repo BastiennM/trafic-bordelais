@@ -6,14 +6,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:trafic_bordeaux/models/user_model.dart';
 import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
 
-enum AuthType { register, login }
-
 class AuthController extends GetxController {
   static AuthController to = Get.find();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController confirmPasswordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   Rxn<User> firebaseUser = Rxn<User>();
@@ -75,9 +73,7 @@ class AuthController extends GetxController {
       await _auth.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
-      emailController.clear();
-      passwordController.clear();
-      print(isConnected);
+      clearController();
       Get.toNamed('/home');
     } catch (error) {
       CustomSnackbar().buildSnackbar('Erreur', 'Erreur lors du login', TypeMessage.error);
@@ -86,6 +82,10 @@ class AuthController extends GetxController {
 
   // User registration using email and password
   registerWithEmailAndPassword(BuildContext context) async {
+    if(passwordController.text != confirmPasswordController.text){
+      CustomSnackbar().buildSnackbar('Erreur', "Les mots de passe ne correspondent pas", TypeMessage.error);
+      return;
+    }
     try {
       await _auth
           .createUserWithEmailAndPassword(
@@ -101,12 +101,10 @@ class AuthController extends GetxController {
             name: nameController.text,
         );
 
-        print(newUser);
         //create the user in firestore
         _createUserFirestore(newUser, result.user!);
         signInWithEmailAndPassword(context);
-        emailController.clear();
-        passwordController.clear();
+        clearController();
       });
     } on FirebaseAuthException catch (error) {
       CustomSnackbar().buildSnackbar('Erreur', error.message ?? "", TypeMessage.error);
@@ -119,11 +117,15 @@ class AuthController extends GetxController {
     update();
   }
 
-  // Sign out
-  Future<void> signOut() {
+  void clearController(){
     nameController.clear();
     emailController.clear();
     passwordController.clear();
+  }
+
+  // Sign out
+  Future<void> signOut() {
+    clearController();
     isConnected.value = false;
     return _auth.signOut();
   }

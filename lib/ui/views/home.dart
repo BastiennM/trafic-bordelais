@@ -49,7 +49,6 @@ class _HomeState extends State<Home> {
             getBottomContainer(),
             getRoadStateIndicator(),
             getRefreshMapWidget(),
-            Center(child: Text(themeModeController.isDark.value.toString()))
           ],
         ),
       ),
@@ -110,6 +109,7 @@ class _HomeState extends State<Home> {
                 CustomTextField(
                   focusNode: focusNode,
                   borderColor: Colors.transparent,
+                    contentPadding: 16,
                     fillColor: themeModeController.isDark.value ? ColorPalette.grey50 : ColorPalette.greyElement,
                     prefix: Icon(
                       Icons.search,
@@ -139,7 +139,7 @@ class _HomeState extends State<Home> {
               ],
             ),
             const SizedBox(height: 10),
-            Obx(() => Container(height: 100, child: doSearchLogic()))
+            Obx(() => SizedBox(height: 100, child: doSearchLogic()))
           ],
         ),
       ),

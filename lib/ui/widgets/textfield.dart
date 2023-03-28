@@ -19,6 +19,7 @@ class CustomTextField extends StatefulWidget {
   final bool needConfirmationSuffix;
   final Color? borderColor;
   final FocusNode? focusNode;
+  final double? contentPadding;
 
   const CustomTextField({Key? key,
     required this.controller,
@@ -33,6 +34,7 @@ class CustomTextField extends StatefulWidget {
     this.password = false,
     this.validator,
     this.focusNode,
+    this.contentPadding,
     this.borderColor}) : super(key: key);
 
   @override
@@ -86,7 +88,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             hintText: widget.placeholder,
             hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(color: ColorPalette.grey200),
             label: widget.label != "" ? Text(widget.label, style: Theme.of(context).textTheme.titleSmall?.copyWith(color: widget.fillColor != null ? !themeModeController.isDark.value ? Colors.white : Colors.black : labelAboveColor, fontSize: 12),) : null,
-            contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            contentPadding: EdgeInsets.all(widget.contentPadding ?? 20),
             filled: true,
             fillColor: widget.fillColor ?? Theme.of(context).focusColor,
             prefixIcon: widget.prefix,
