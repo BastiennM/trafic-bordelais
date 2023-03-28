@@ -25,6 +25,7 @@ class _HomeState extends State<Home> {
   ThemeModeController themeModeController = Get.put(ThemeModeController());
   TimerController timerController = Get.put(TimerController());
   HomeController homeController = Get.find<HomeController>();
+  FocusNode focusNode = FocusNode();
 
   buildSnackbar() {
     return CustomSnackbar().buildSnackbar(
@@ -96,7 +97,7 @@ class _HomeState extends State<Home> {
         width: MediaQuery.of(context).size.width,
         height: 200,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
           color: !themeModeController.isDark.value
               ? ColorPalette.greyCard
               : Colors.white,
@@ -107,6 +108,7 @@ class _HomeState extends State<Home> {
             Stack(
               children: [
                 CustomTextField(
+                  focusNode: focusNode,
                   borderColor: Colors.transparent,
                     fillColor: themeModeController.isDark.value ? ColorPalette.grey50 : ColorPalette.greyElement,
                     prefix: Icon(
@@ -125,7 +127,10 @@ class _HomeState extends State<Home> {
                       right: 14,
                       top: 15,
                       child: InkWell(
-                          onTap: () => homeController.emptySearch(),
+                          onTap: () {
+                            focusNode.unfocus();
+                            homeController.emptySearch();
+                          },
                           child: Icon(Icons.close,
                               color: themeModeController.isDark.value ? ColorPalette.greyBack : Colors.white, size: 18)),
                     ),

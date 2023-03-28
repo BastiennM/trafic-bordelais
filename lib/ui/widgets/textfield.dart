@@ -18,6 +18,7 @@ class CustomTextField extends StatefulWidget {
   final Function? validator;
   final bool needConfirmationSuffix;
   final Color? borderColor;
+  final FocusNode? focusNode;
 
   const CustomTextField({Key? key,
     required this.controller,
@@ -31,6 +32,7 @@ class CustomTextField extends StatefulWidget {
     this.fillColor,
     this.password = false,
     this.validator,
+    this.focusNode,
     this.borderColor}) : super(key: key);
 
   @override
@@ -38,12 +40,13 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  final FocusNode _focus = FocusNode();
+  late FocusNode _focus;
   Color labelAboveColor = ColorPalette.grey200;
 
   @override
   void initState() {
     super.initState();
+    _focus = widget.focusNode ?? FocusNode();
     _focus.addListener(_onFocusChange);
   }
 
