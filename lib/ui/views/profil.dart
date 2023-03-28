@@ -51,7 +51,7 @@ class Profil extends StatelessWidget {
                   ? Colors.white
                   : Colors.black, size: 20),
               needIcon: true,
-              needArrowIcon: true,
+              needArrowIcon: false,
               width: 300,
             ),
             ),

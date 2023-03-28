@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import 'package:trafic_bordeaux/core/constants/constants.dart';
 import 'package:trafic_bordeaux/core/constants/enums.dart';
 import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
@@ -7,13 +9,14 @@ import 'package:trafic_bordeaux/ui/widgets/snackbar.dart';
 import '../../core/constants/color_palette.dart';
 
 class StateRoadIndicator {
+  ThemeModeController themeMode = Get.put(ThemeModeController());
   Widget getRoadIndicator(EtatVoie currentEtat) {
     return Container(
       width:50,
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
-          color: Colors.white,
+          color: themeMode.isDark.value ? Colors.white : ColorPalette.greyCard,
           border: Border.all(color: getColorIndicator(currentEtat))
         ),
         child: Center(child: getSvgIndicator(currentEtat))
@@ -24,7 +27,7 @@ class StateRoadIndicator {
     Widget svgIndicator;
 
     Map possibilities = {
-      EtatVoie.INCONNU: const Text('?', style: TextStyle(fontSize: 20)),
+      EtatVoie.INCONNU: Text('?', style: TextStyle(fontSize: 20, color: !themeMode.isDark.value ? Colors.white : Colors.black)),
       EtatVoie.DENSE: SvgPicture.string(orangeCarState),
       EtatVoie.EMBOUTEILLE: SvgPicture.string(redTurtleState),
       EtatVoie.FLUIDE: SvgPicture.string(greenRabbitState),

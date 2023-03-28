@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import '../../core/constants/color_palette.dart';
 import '../../core/constants/themes.dart';
 import '../../core/utils/validation_functions.dart';
@@ -58,6 +60,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeModeController themeModeController = Get.put(ThemeModeController());
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -78,14 +82,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
           decoration: InputDecoration(
             hintText: widget.placeholder,
             hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(color: ColorPalette.grey200),
-            label: widget.label != "" ? Text(widget.label, style: Theme.of(context).textTheme.titleSmall?.copyWith(color: widget.fillColor != null ? Colors.black : labelAboveColor, fontSize: 12),) : null,
+            label: widget.label != "" ? Text(widget.label, style: Theme.of(context).textTheme.titleSmall?.copyWith(color: widget.fillColor != null ? !themeModeController.isDark.value ? Colors.white : Colors.black : labelAboveColor, fontSize: 12),) : null,
             contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             filled: true,
             fillColor: widget.fillColor ?? Theme.of(context).focusColor,
             prefixIcon: widget.prefix,
             suffixIcon: widget.needConfirmationSuffix ? getSuffix : null,
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: widget.borderColor ?? ColorPalette.grey200),
+              borderSide: BorderSide(color: widget.borderColor ?? Colors.transparent),
               borderRadius: BorderRadius.circular(widget.circularBorder)
             ),
             errorBorder: OutlineInputBorder(
@@ -93,11 +97,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 borderRadius: BorderRadius.circular(widget.circularBorder)
             ),
             focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: borderColor),
+                borderSide: BorderSide(color: widget.borderColor ?? borderColor),
                 borderRadius: BorderRadius.circular(widget.circularBorder)
             ),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: widget.borderColor ?? ColorPalette.grey200),
+                borderSide: BorderSide(color: widget.borderColor ?? Colors.transparent),
                 borderRadius: BorderRadius.circular(widget.circularBorder)
             ),
             errorText: widget.needConfirmationSuffix ? Validators.errorText(widget.controller): null,

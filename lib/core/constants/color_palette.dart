@@ -70,4 +70,6 @@ class ColorPalette {
   static const Color orangeRoadState = Color(0xFFFBBD05);
   static const Color greenRoadState = Color(0xFF34A853);
   static const Color redRoadState = Color(0xFFEA4336);
+  static const Color greyCard = Color(0xFF161618);
+  static const Color greyElement = Color(0xFF29282b);
 }

@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:trafic_bordeaux/core/constants/constants.dart';
 import 'package:trafic_bordeaux/core/constants/enums.dart';
+import 'package:trafic_bordeaux/core/utils/map_utils.dart';
 import 'package:trafic_bordeaux/models/address_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:trafic_bordeaux/models/search_address_model.dart';
@@ -15,7 +16,7 @@ import 'package:trafic_bordeaux/models/search_address_model.dart';
 class HomeController extends GetxController {
   final client = http.Client();
   final RxString homeText = "Home text".obs;
-  final Rx<Position?> currentPosition = Rx(null);
+  final Rx<LatLng?> currentPosition = Rx(null);
   final RxBool isLoadingPosition = true.obs;
   final RxBool emptyAfterSearch = false.obs;
   final FocusNode focus = FocusNode();
@@ -31,7 +32,7 @@ class HomeController extends GetxController {
   final currentRoadState = EtatVoie.FLUIDE.obs;
   final List<EtatVoie> visibleStateRoadList = [];
 
-  Future<Position> determinePosition() async {
+  Future<LatLng> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -52,11 +53,17 @@ class HomeController extends GetxController {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
+    
+    Position position = await Geolocator.getCurrentPosition();
+    
+    if (isInSquare(position.longitude, position.latitude)) {
+      isLoadingPosition.value = false;
+      return LatLng(position.latitude, position.longitude);
+    } else {
+      isLoadingPosition.value = false;
+      return LatLng(44.8386935779402, -0.56946910799683); //Centre de bordeaux
+    }
 
-    final Position position = await Geolocator.getCurrentPosition();
-    isLoadingPosition.value = false;
-
-    return position;
   }
 
   Future<void> createPolylines() async {
@@ -217,7 +224,8 @@ class HomeController extends GetxController {
       var allData = json.decode(response.body) as Map<dynamic, dynamic>;
 
       for (var element in allData['features']) {
-        if(isInSquare(element['geometry']['coordinates'][0], element['geometry']['coordinates'][1])){
+        print(allData);
+        if(isInSquare(element['geometry']['coordinates'][0], element['geometry']['coordinates'][1])) {
           addressListSearch.add(SearchAdressModel.fromMap(element));
         }
       }
@@ -226,10 +234,6 @@ class HomeController extends GetxController {
     } catch (e) {
       print(e);
     }
-  }
-
-  bool isInSquare(double lon, double lat) { //Here to check if the searched address is in area of bordeaux API response
-    return lon >= -0.8835 && lon <= -0.44377 && lat >= 44.730085 && lat <= 45.04764;
   }
 
   void emptySearch(){

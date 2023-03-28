@@ -47,7 +47,8 @@ class _HomeState extends State<Home> {
             getProfileButton(),
             getBottomContainer(),
             getRoadStateIndicator(),
-            getRefreshMapWidget()
+            getRefreshMapWidget(),
+            Center(child: Text(themeModeController.isDark.value.toString()))
           ],
         ),
       ),
@@ -62,11 +63,11 @@ class _HomeState extends State<Home> {
           top: 60,
           left: 15,
           child: Container(
-            height: 40,
-            width: 40,
+            height: 45,
+            width: 45,
             decoration: BoxDecoration(
                 color: !themeModeController.isDark.value
-                    ? ColorPalette.darkGrey300
+                    ? ColorPalette.greyCard
                     : Colors.white,
                 borderRadius: BorderRadius.circular(14.0)),
             child: CustomIconButton(
@@ -97,7 +98,7 @@ class _HomeState extends State<Home> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: !themeModeController.isDark.value
-              ? ColorPalette.darkGrey300
+              ? ColorPalette.greyCard
               : Colors.white,
         ),
         child: Column(
@@ -106,16 +107,17 @@ class _HomeState extends State<Home> {
             Stack(
               children: [
                 CustomTextField(
-                    fillColor: ColorPalette.grey50,
-                    prefix: const Icon(
+                  borderColor: Colors.transparent,
+                    fillColor: themeModeController.isDark.value ? ColorPalette.grey50 : ColorPalette.greyElement,
+                    prefix: Icon(
                       Icons.search,
-                      color: Colors.black,
+                      color: themeModeController.isDark.value ? Colors.black : Colors.white,
                       size: 16,
                     ),
                     label: "Rechercher un lieu",
-                    borderColor: Colors.white,
                     circularBorder: 12,
-                    controller: homeController.placeSearchController),
+                    controller: homeController.placeSearchController
+                ),
                 Obx(
                   () => Visibility(
                     visible: homeController.searchString.value != "",
@@ -124,8 +126,8 @@ class _HomeState extends State<Home> {
                       top: 15,
                       child: InkWell(
                           onTap: () => homeController.emptySearch(),
-                          child: const Icon(Icons.close,
-                              color: ColorPalette.greyBack, size: 18)),
+                          child: Icon(Icons.close,
+                              color: themeModeController.isDark.value ? ColorPalette.greyBack : Colors.white, size: 18)),
                     ),
                   ),
                 )
@@ -169,9 +171,10 @@ class _HomeState extends State<Home> {
             return Container(
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
+                color: !themeModeController.isDark.value ? ColorPalette.greyElement : Colors.transparent,
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
                 border: Border.all(
-                  color: ColorPalette.grey50,
+                  color: themeModeController.isDark.value ? ColorPalette.grey50 : Colors.transparent,
                   width: 1,
                 ),
               ),
@@ -194,7 +197,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Icon(Icons.pin_drop),
-                    Text(item.name),
+                    Text(item.name, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black)),
                     const SizedBox.shrink()
                   ],
                 ),
@@ -208,24 +211,22 @@ class _HomeState extends State<Home> {
   }
 
   Widget getEmptyResult() {
-    return const Center(
+    return  Center(
         child: Padding(
-      padding: EdgeInsets.only(top: 28.0),
-      child: Text('c\'est vide'),
+      padding: const EdgeInsets.only(top: 28.0),
+      child: Text('Aucun résultat', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black))
     ));
   }
 
   Widget getNotEnoughLetterResult() {
-    return const Center(
-        child: Padding(
-      padding: EdgeInsets.only(top: 28.0),
-      child: Text('l\'adresse doit f aire au moins 3 carac'),
-    ));
+    return Center(
+        child: Text('L\'adresse doit faire au moins 3 caractères', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black)),
+    );
   }
 
   Widget doSearchLogic() {
     Widget widgetToReturn =
-        const Center(child: CircularProgressIndicator(color: Colors.black));
+    Center(child: CircularProgressIndicator(color: themeModeController.isDark.value ? Colors.black : Colors.white));
 
     if (homeController.searchString.value.length < 3) {
       widgetToReturn = getNotEnoughLetterResult();
@@ -239,7 +240,7 @@ class _HomeState extends State<Home> {
         widgetToReturn = getListResultSearch();
       } else if (homeController.addressListSearch.value.isEmpty &&
           homeController.searchString.value == "") {
-        widgetToReturn = const Center(child: Text('Commencez à rechercher une adresse !'));
+        widgetToReturn = Center(child: Text('Commencez à rechercher une adresse !', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black)));
       }
     }
 
@@ -260,16 +261,15 @@ class _HomeState extends State<Home> {
                 child: Container(
                   padding: const EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12.0),
-                      border: Border.all(color:ColorPalette.grey100)
+                      color: themeModeController.isDark.value ? Colors.white : ColorPalette.greyCard,
+                      borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Row(
 
                     children: [
-                      const Text('Rafraichissement des données dans :'),
+                      Text('Rafraichissement des données dans :', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color:!themeModeController.isDark.value ? Colors.white : ColorPalette.greyCard)),
                       const SizedBox(width:5),
-                      Obx(() => Text(timerController.getFormattedTime(),style: const TextStyle(fontWeight: FontWeight.bold)))
+                      Obx(() => Text(timerController.getFormattedTime(),style: Theme.of(context).textTheme.bodyMedium?.copyWith(color:!themeModeController.isDark.value ? Colors.white : ColorPalette.greyCard)))
                     ],
                   ),
                 ),
@@ -277,14 +277,13 @@ class _HomeState extends State<Home> {
               const SizedBox(width: 6),
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: themeModeController.isDark.value ? Colors.white : ColorPalette.greyCard,
                     borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color:ColorPalette.grey100)
               ),
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(9.0),
                 child: Obx(()=> InkWell(
                     onTap: () => timerController.canReset.value ? timerController.resetTimer() : null,
-                      child: Icon(Icons.refresh, color: timerController.canReset.value ? Colors.black : ColorPalette.grey200)
+                      child: Icon(Icons.refresh, color: timerController.canReset.value ? themeModeController.isDark.value ? Colors.black : Colors.white : ColorPalette.grey200)
                   ),
                 ),
               )
