@@ -1,16 +1,22 @@
-# trafic_bordeaux
+# Trafic Bordellais
 
-A template project using getX architecture
+# Version
+Dart : 2.18.4 \
+Flutter : 3.3.8
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+App test only on IOS platform
 
-A few resources to get you started if this is your first Flutter project:
+Getx \
+Shared preference \
+Internalization\
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Login / Register with firebase \
+Switch app themes, we have implemented a dark mode. The dark mode is handled with 
+shard preference.\
+Search a location in Bordeaux city, and have traffic status around the location.
+We use an API from Bordeaux, this API give us the information of the traffic status
+for each road in the city. We have defind four status, green for fluid traffic,
+orange for heavy traffic, grey for unknown status and red for traffic jams\
+We have handle an internalization, It's possible to Switch beteewn French and English the app.
