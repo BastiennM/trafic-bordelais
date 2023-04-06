@@ -9,6 +9,7 @@ final Map<String, String> enUs = {
   'register': 'Register',
   'login' : 'Login',
   'password': 'Password',
+  'language': 'Language',
   'confirmPassword': 'Confirm Password',
   'email' : 'Email',
   'emailPlaceholder': 'Email',

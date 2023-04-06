@@ -12,6 +12,7 @@ final Map<String, String> frFR = {
   'confirmPassword' : 'Confirmer le mot de passe',
   'email' : 'Mail',
   'emailPlaceholder': 'Email',
+  'language': 'Language',
   'alreadyRegistered' : 'Vous avez déjà un compte ?',
   'newUser' : "Vous n'etes pas encore inscrit ?",
   'registerNow' : "S'inscrire",

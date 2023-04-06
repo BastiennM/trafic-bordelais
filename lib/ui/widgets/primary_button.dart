@@ -17,6 +17,7 @@ class CustomButton extends StatelessWidget {
   final bool isKeyboardVisible;
   final bool fill;
   final bool needIcon;
+  final Widget? customTrailingWidget;
   final double width;
   final double height;
   final Widget? icon;
@@ -36,6 +37,7 @@ class CustomButton extends StatelessWidget {
       this.isKeyboardVisible = false,
       this.height = 20,
       this.width = 50,
+        this.customTrailingWidget,
       this.fill = true,
       this.type = TypeButton.initial});
 
@@ -58,7 +60,7 @@ class CustomButton extends StatelessWidget {
               : !fill
                   ? Colors.transparent
                   : ThemeModeController().isDark.value ? ColorPalette.ctaButton : getColor,
-          child: Container(
+          child: SizedBox(
             height: height,
             width: double.infinity,
             child: loading
@@ -81,7 +83,7 @@ class CustomButton extends StatelessWidget {
                             visible: needArrowIcon,
                             child: Row(
                               children: [
-                                Icon(Icons.arrow_forward_ios,  color: disabled ? themeModeController.isDark.value
+                                customTrailingWidget ?? Icon(Icons.arrow_forward_ios,  color: disabled ? themeModeController.isDark.value
                                     ?  Colors.white.withOpacity(0.5) : ColorPalette.ctaButton.withOpacity(0.5) :
                                 themeModeController.isDark.value
                                     ? Colors.white

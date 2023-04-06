@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:trafic_bordeaux/controller/language_controller.dart';
 import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import 'bindings/initial_bindings.dart';
 import 'core/constants/config.dart';
@@ -22,11 +23,15 @@ Future<void> mainCommon(Config config) async {
   );
 
   ThemeModeController controller = Get.put(ThemeModeController());
+  LanguageController languageController = Get.put(LanguageController());
+  languageController.setLanguage();
   controller.setTheme();
+  Locale local = await languageController.getLocal();
 
   runZonedGuarded<Future<void>>(() async {
     runApp(MyApp(
       config: config,
+      local: local,
     ));
   }, (Object error, StackTrace stackTrace) async {
     if (kDebugMode) {
@@ -37,7 +42,8 @@ Future<void> mainCommon(Config config) async {
 
 class MyApp extends StatelessWidget {
   final Config config;
-  const MyApp({super.key, required this.config});
+  final Locale local;
+  const MyApp({super.key, required this.config, required this.local});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -50,7 +56,7 @@ class MyApp extends StatelessWidget {
           theme: Themes.lightTheme,
           darkTheme: Themes.darkTheme,
           themeMode: ThemeMode.system,
-          locale: const Locale('fr', 'FR'),
+          locale: local,
           translations: AppLocalization(),
           navigatorKey: Get.key, // set property
         ));

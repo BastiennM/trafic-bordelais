@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trafic_bordeaux/controller/auth_controller.dart';
+import 'package:trafic_bordeaux/controller/language_controller.dart';
 import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import 'package:trafic_bordeaux/core/app_export.dart';
 import 'package:trafic_bordeaux/core/constants/color_palette.dart';
@@ -14,7 +15,8 @@ class Profil extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthController authController = Get.find<AuthController>();
     ThemeModeController themeModeController = Get.find<ThemeModeController>();
-    
+    LanguageController languageController = Get.find<LanguageController>();
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -54,7 +56,30 @@ class Profil extends StatelessWidget {
               needArrowIcon: false,
               width: 300,
             ),
+
             ),
+              Padding(
+                padding: const EdgeInsets.only(top : 20.0),
+                child: CustomButton(
+                  height: 30,
+                  label: 'language'.tr,
+                  color: themeModeController.isDark.value
+                      ? Colors.black
+                      : ColorPalette.ctaButton,
+                  onPressed: () {
+                    languageController.changeLanguage();
+                  },
+                  customTrailingWidget: Text(Get.locale!.languageCode.toUpperCase(), style: TextStyle(color: themeModeController.isDark.value
+                      ? Colors.white
+                      : Colors.black)),
+                  icon: FaIcon(FontAwesomeIcons.language,color: themeModeController.isDark.value
+                      ? Colors.white
+                      : Colors.black, size: 20),
+                  needIcon: true,
+                  needArrowIcon: true,
+                  width: 300,
+                ),
+              ),
             Padding(
             padding: const EdgeInsets.only(top: 20),
             child: CustomButton(

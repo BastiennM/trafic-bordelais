@@ -27,7 +27,7 @@ class HomeController extends GetxController {
   final addressListSearch = <SearchAdressModel>[].obs;
   final polylineToDisplay = <Polyline>[].obs;
   MapController mapController = MapController();
-  final RxDouble zoom = 15.0.obs;
+  final RxDouble zoom = 18.0.obs;
   final listMarker = <Marker>[].obs;
   final currentRoadState = EtatVoie.FLUIDE.obs;
   final List<EtatVoie> visibleStateRoadList = [];
@@ -65,7 +65,7 @@ class HomeController extends GetxController {
     }
 
   }
-
+  
   Future<void> createPolylines() async {
 
     visibleStateRoadList.clear(); //Resetting array values
@@ -150,22 +150,39 @@ class HomeController extends GetxController {
     updateStateRoad(getMostFrequent(visibleStateRoadList));
   }
 
-  EtatVoie getMostFrequent(List<EtatVoie> list) { //Permet de récupérer l'état le plus fréquent dans une liste d'état donnée (visible à l'écran)
+  EtatVoie getMostFrequent(List<EtatVoie> list) {
     Map<EtatVoie, int> countMap = {};
     int maxCount = 0;
+    int embouteilleCount = 0;
     EtatVoie mostFrequent = EtatVoie.INCONNU;
 
     for (EtatVoie e in list) {
       countMap[e] = (countMap[e] ?? 0) + 1;
+      if (e == EtatVoie.EMBOUTEILLE) {
+        embouteilleCount++;
+      }
+    }
 
-      if (countMap[e]! > maxCount) {
-        maxCount = countMap[e]!;
-        mostFrequent = e;
+    if (countMap[EtatVoie.DENSE] != null) {
+      mostFrequent = EtatVoie.DENSE;
+      maxCount = countMap[EtatVoie.DENSE]!;
+    } else if (embouteilleCount > maxCount) {
+      mostFrequent = EtatVoie.EMBOUTEILLE;
+      maxCount = embouteilleCount;
+    } else {
+      for (EtatVoie e in countMap.keys) {
+        if (e != EtatVoie.EMBOUTEILLE && e != EtatVoie.DENSE && countMap[e]! > maxCount) {
+          maxCount = countMap[e]!;
+          mostFrequent = e;
+        }
       }
     }
 
     return mostFrequent;
   }
+
+
+
 
   Future<void> fetchAllData() async {
     try {
