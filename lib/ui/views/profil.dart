@@ -27,7 +27,7 @@ class Profil extends StatelessWidget {
               SizedBox(height: 130),
             Center(
             child: Text(
-              'Mon profil',
+              'my_profil'.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             ),

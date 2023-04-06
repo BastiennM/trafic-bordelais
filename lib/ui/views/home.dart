@@ -29,8 +29,8 @@ class _HomeState extends State<Home> {
 
   buildSnackbar() {
     return CustomSnackbar().buildSnackbar(
-        'Etat de la zone actuelle',
-        'La zone est ${homeController.currentRoadState.value.name}',
+        'road_state'.tr,
+        '${'info_road_state'.tr}${homeController.currentRoadState.value}',
         StateRoadIndicator()
             .getTypeMessage(homeController.currentRoadState.value),
         position: SnackPosition.TOP,
@@ -219,13 +219,13 @@ class _HomeState extends State<Home> {
     return  Center(
         child: Padding(
       padding: const EdgeInsets.only(top: 28.0),
-      child: Text('Aucun résultat', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black))
+      child: Text('no_result'.tr, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black))
     ));
   }
 
   Widget getNotEnoughLetterResult() {
     return Center(
-        child: Text('L\'adresse doit faire au moins 3 caractères', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black)),
+        child: Text('email_size'.tr, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black)),
     );
   }
 
@@ -245,7 +245,7 @@ class _HomeState extends State<Home> {
         widgetToReturn = getListResultSearch();
       } else if (homeController.addressListSearch.value.isEmpty &&
           homeController.searchString.value == "") {
-        widgetToReturn = Center(child: Text('Commencez à rechercher une adresse !', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black)));
+        widgetToReturn = Center(child: Text('find_adress'.tr, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black)));
       }
     }
 
@@ -272,7 +272,7 @@ class _HomeState extends State<Home> {
                   child: Row(
 
                     children: [
-                      Text('Rafraichissement des données dans :', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color:!themeModeController.isDark.value ? Colors.white : ColorPalette.greyCard)),
+                      Text('refresh'.tr, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color:!themeModeController.isDark.value ? Colors.white : ColorPalette.greyCard)),
                       const SizedBox(width:5),
                       Obx(() => Text(timerController.getFormattedTime(),style: Theme.of(context).textTheme.bodyMedium?.copyWith(color:!themeModeController.isDark.value ? Colors.white : ColorPalette.greyCard)))
                     ],

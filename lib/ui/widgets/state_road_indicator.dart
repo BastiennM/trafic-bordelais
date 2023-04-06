@@ -68,4 +68,19 @@ class StateRoadIndicator {
 
     return typeMessage;
   }
+
+  String getStateMessage(EtatVoie currentEtat) {
+    String stateMessage;
+
+    Map possibilities = {
+      EtatVoie.INCONNU: 'unknown'.tr,
+      EtatVoie.DENSE: 'heavy'.tr,
+      EtatVoie.EMBOUTEILLE: 'jam'.tr,
+      EtatVoie.FLUIDE: 'fluid'.tr,
+    };
+
+    stateMessage = possibilities[currentEtat] ?? 'unknown'.tr;
+
+    return stateMessage;
+  }
 }
