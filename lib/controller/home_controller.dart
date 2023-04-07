@@ -25,10 +25,10 @@ class HomeController extends GetxController {
   RxString searchString = ''.obs;
   final addressListFull = <AddressModel>[].obs;
   final addressListSearch = <SearchAdressModel>[].obs;
-  final polylineToDisplay = <Polyline>[].obs;
+  List<Polyline> polylineToDisplay = <Polyline>[].obs;
   MapController mapController = MapController();
   final RxDouble zoom = 18.0.obs;
-  final listMarker = <Marker>[].obs;
+  List<Marker> listMarker = <Marker>[].obs;
   final currentRoadState = EtatVoie.fluide.obs;
   final List<EtatVoie> visibleStateRoadList = [];
 
@@ -73,7 +73,7 @@ class HomeController extends GetxController {
     for (int i = 0; i < addressListFull.length; i++) {
       List<LatLng> matricesCoordonnees = [];
 
-      for (var element in addressListFull.value[i].coordinates) {
+      for (var element in addressListFull[i].coordinates) {
         matricesCoordonnees.add(LatLng(element[1], element[0]));
       }
 
@@ -88,7 +88,7 @@ class HomeController extends GetxController {
       Polyline polyline = Polyline(
         points: polyligneCoordonnees,
         strokeWidth: 5,
-        color: getColorByEtat(addressListFull.value[i].etat),
+        color: getColorByEtat(addressListFull[i].etat),
       );
       polylineToDisplay.add(polyline);
     }
@@ -114,7 +114,7 @@ class HomeController extends GetxController {
 
       List<LatLng> matricesCoordonnees = [];
 
-      for (var element in addressListFull.value[i].coordinates) {
+      for (var element in addressListFull[i].coordinates) {
         matricesCoordonnees.add(LatLng(element[1], element[0]));
       }
 
@@ -140,10 +140,10 @@ class HomeController extends GetxController {
         Polyline polyline = Polyline(
           points: polyligneCoordonnees,
           strokeWidth: 5,
-          color: getColorByEtat(addressListFull.value[i].etat),
+          color: getColorByEtat(addressListFull[i].etat),
         );
 
-        polylineToDisplay.value.add(polyline);
+        polylineToDisplay.add(polyline);
       }
     }
 
@@ -250,8 +250,8 @@ class HomeController extends GetxController {
 
   void emptySearch(){
     searchString.value = "";
-    addressListSearch.value.clear();
-    listMarker.value.clear();
+    addressListSearch.clear();
+    listMarker.clear();
     placeSearchController.text = "";
   }
 
@@ -268,11 +268,11 @@ class HomeController extends GetxController {
     });
 
     debounce(searchString, (_) async {
-      addressListSearch.value.clear();
+      addressListSearch.clear();
       if(searchString.value.isNotEmpty) startSearching.value = true;
       if(searchString.value.isEmpty) startSearching.value = false;
       if(searchString.value.length > 2) await fetchAdresseFromSearch();
-      if(addressListSearch.value.isEmpty) emptyAfterSearch.value = true;
+      if(addressListSearch.isEmpty) emptyAfterSearch.value = true;
     }, time: const Duration(seconds: 1));
   }
 }
