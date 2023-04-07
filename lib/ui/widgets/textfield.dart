@@ -110,7 +110,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 borderRadius: BorderRadius.circular(widget.circularBorder)
             ),
             errorText: widget.needConfirmationSuffix ? Validators.errorText(widget.controller): null,
-            errorStyle: Theme.of(context).textTheme.titleLarge?.copyWith(color: ColorPalette.errorColorText),
+            errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorPalette.errorColorText),
           ),
         ),
         widget.labelUnder != "" ? Padding(

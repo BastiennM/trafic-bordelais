@@ -4,19 +4,31 @@
 Dart : 2.18.4 \
 Flutter : 3.3.8
 
-## Features
+# Platerforme
+Le développement à été effectué sur un Iphone 14 pro max sous iOS 16.1 \
+Le test de lancement et de l'installation de l'application à été effectué sur un Pixel 4 sous l'API 33 (requise par certains plugins)
 
-App test only on IOS platform
+# Maquette
+Une maquette a initialement été imaginé : https://www.figma.com/file/nfPsQXFBpGvkUZakFDH5FP/Application-Trafic-Bordelais?node-id=1%3A20&t=5YnKGnV77rJh3loV-1
+# Features
 
-Getx \
-Shared preference \
-Internalization\
+## Getx
+La gestion d'état a été faite avec Getx, amenant avec lui beaucoup de fonctionnalité (tel que les SnackBar ou encore l'internationalisation) 
 
-Login / Register with firebase \
-Switch app themes, we have implemented a dark mode. The dark mode is handled with 
-shard preference.\
-Search a location in Bordeaux city, and have traffic status around the location.
-We use an API from Bordeaux, this API give us the information of the traffic status
-for each road in the city. We have defind four status, green for fluid traffic,
-orange for heavy traffic, grey for unknown status and red for traffic jams\
-We have handle an internalization, It's possible to Switch beteewn French and English the app.
+## Shared preferences
+Les préférences de l'utilisateur sont gérées avec shared preferences, tel que le thème de l'application ou encore la langue 
+
+## Internationalisation
+L'internationalisation a été gérée avec Getx, il est possible de passer l'application en français ou en anglais 
+
+Liste des fonctionnalités implémentées : 
+
+- Connexion / Inscription avec Firebase Authentication
+
+- Changer le thème de l'application, nous avons implémenté un mode sombre. Le mode sombre est géré avec shared preferences.
+
+- Recherchez un emplacement dans la ville de Bordeaux et obtenez des informations sur l'état de la circulation autour de cet emplacement après sa séléction. Nous utilisons une API de Bordeaux, cette API nous donne les informations sur l'état de la circulation pour chaque route de la ville. Nous avons défini quatre états : vert pour une circulation fluide, orange pour une circulation dense, gris pour un état inconnu et rouge pour des embouteillages.
+
+- Rafrachissement des données de l'API toutes les 5 minutes. Possibilité de forcer le rafraichissement manuellement. (Blocage du bouton pendant le rafraichissement si celui-ci est cliqué trop de fois)
+
+- Nous avons géré l'internationalisation. Il est possible de passer l'application en français ou en anglais. (également géré avec shared preferences)
