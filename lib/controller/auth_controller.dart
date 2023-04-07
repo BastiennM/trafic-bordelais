@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,9 +38,9 @@ class AuthController extends GetxController {
     super.onClose();
   }
 
-  handleAuthChanged(_firebaseUser) async {
+  handleAuthChanged(firebaseUser) async {
     //get user data from firestore
-    if (_firebaseUser?.uid != null) {
+    if (firebaseUser?.uid != null) {
       firestoreUser.bindStream(streamFirestoreUser());
       isConnected.value = true;
       update();
@@ -53,7 +55,7 @@ class AuthController extends GetxController {
 
   //Streams the firestore user from the firestore collection
   Stream<UserModel> streamFirestoreUser() {
-    print('streamFirestoreUser()');
+    log('streamFirestoreUser()');
 
     return _db
         .doc('/users/${firebaseUser.value!.uid}')
@@ -91,8 +93,8 @@ class AuthController extends GetxController {
           .createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text)
           .then((result) async {
-        print('uID: ${result.user!.uid}');
-        print('email: ${result.user!.email}');
+        log('uID: ${result.user!.uid}');
+        log('email: ${result.user!.email}');
 
         //create the new user object
         UserModel newUser = UserModel(
@@ -112,8 +114,8 @@ class AuthController extends GetxController {
   }
 
   //create the firestore user in users collection
-  void _createUserFirestore(UserModel user, User _firebaseUser) {
-    _db.doc('/users/${_firebaseUser.uid}').set(user.toJson());
+  void _createUserFirestore(UserModel user, User firebaseUser) {
+    _db.doc('/users/${firebaseUser.uid}').set(user.toJson());
     update();
   }
 

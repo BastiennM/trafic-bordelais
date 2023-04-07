@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
     return Provider(
         create: (BuildContext context) => config,
         child: GetMaterialApp(
-          initialRoute: AppPages.INITIAL,
+          initialRoute: AppPages.initial,
           getPages: AppPages.routes,
           initialBinding: InitialBindings(),
           theme: Themes.lightTheme,

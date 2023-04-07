@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
@@ -10,7 +10,7 @@ import 'package:trafic_bordeaux/core/constants/constants.dart';
 import 'package:trafic_bordeaux/core/constants/enums.dart';
 import 'package:trafic_bordeaux/core/utils/map_utils.dart';
 import 'package:trafic_bordeaux/models/address_model.dart';
-import 'package:http/http.dart' as http;
+import "package:http/http.dart" as http;
 import 'package:trafic_bordeaux/models/search_address_model.dart';
 
 class HomeController extends GetxController {
@@ -29,7 +29,7 @@ class HomeController extends GetxController {
   MapController mapController = MapController();
   final RxDouble zoom = 18.0.obs;
   final listMarker = <Marker>[].obs;
-  final currentRoadState = EtatVoie.FLUIDE.obs;
+  final currentRoadState = EtatVoie.fluide.obs;
   final List<EtatVoie> visibleStateRoadList = [];
 
   Future<LatLng> determinePosition() async {
@@ -65,7 +65,7 @@ class HomeController extends GetxController {
     }
 
   }
-  
+
   Future<void> createPolylines() async {
 
     visibleStateRoadList.clear(); //Resetting array values
@@ -73,9 +73,9 @@ class HomeController extends GetxController {
     for (int i = 0; i < addressListFull.length; i++) {
       List<LatLng> matricesCoordonnees = [];
 
-      addressListFull.value[i].coordinates.forEach((element) {
+      for (var element in addressListFull.value[i].coordinates) {
         matricesCoordonnees.add(LatLng(element[1], element[0]));
-      });
+      }
 
       List<LatLng> polyligneCoordonnees = [];
       EtatVoie etatVoie = matchEtatWithEnum(addressListFull[i].etat);
@@ -114,9 +114,9 @@ class HomeController extends GetxController {
 
       List<LatLng> matricesCoordonnees = [];
 
-      addressListFull.value[i].coordinates.forEach((element) {
+      for (var element in addressListFull.value[i].coordinates) {
         matricesCoordonnees.add(LatLng(element[1], element[0]));
-      });
+      }
 
       // Vérifiez si au moins un point se trouve dans la zone visible de la carte
       bool visible = false;
@@ -154,24 +154,24 @@ class HomeController extends GetxController {
     Map<EtatVoie, int> countMap = {};
     int maxCount = 0;
     int embouteilleCount = 0;
-    EtatVoie mostFrequent = EtatVoie.INCONNU;
+    EtatVoie mostFrequent = EtatVoie.inconnu;
 
     for (EtatVoie e in list) {
       countMap[e] = (countMap[e] ?? 0) + 1;
-      if (e == EtatVoie.EMBOUTEILLE) {
+      if (e == EtatVoie.embouteille) {
         embouteilleCount++;
       }
     }
 
-    if (countMap[EtatVoie.DENSE] != null) {
-      mostFrequent = EtatVoie.DENSE;
-      maxCount = countMap[EtatVoie.DENSE]!;
+    if (countMap[EtatVoie.dense] != null) {
+      mostFrequent = EtatVoie.dense;
+      maxCount = countMap[EtatVoie.dense]!;
     } else if (embouteilleCount > maxCount) {
-      mostFrequent = EtatVoie.EMBOUTEILLE;
+      mostFrequent = EtatVoie.embouteille;
       maxCount = embouteilleCount;
     } else {
       for (EtatVoie e in countMap.keys) {
-        if (e != EtatVoie.EMBOUTEILLE && e != EtatVoie.DENSE && countMap[e]! > maxCount) {
+        if (e != EtatVoie.embouteille && e != EtatVoie.dense && countMap[e]! > maxCount) {
           maxCount = countMap[e]!;
           mostFrequent = e;
         }
@@ -195,25 +195,21 @@ class HomeController extends GetxController {
       }
 
       } catch (e){
-      print(e);
+      log(e.toString());
     }
   }
 
   Color getColorByEtat(String etat){
     EtatVoie finalEtat = matchEtatWithEnum(etat);
     switch (finalEtat) {
-      case EtatVoie.INCONNU:
+      case EtatVoie.inconnu:
         return Colors.grey;
-        break;
-      case EtatVoie.FLUIDE:
+      case EtatVoie.fluide:
         return Colors.green;
-        break;
-      case EtatVoie.EMBOUTEILLE:
+      case EtatVoie.embouteille:
         return Colors.red;
-        break;
-      case EtatVoie.DENSE:
+      case EtatVoie.dense:
         return Colors.orange;
-        break;
       default:
         return Colors.grey;
     }
@@ -222,15 +218,15 @@ class HomeController extends GetxController {
   EtatVoie matchEtatWithEnum(String etat){
     switch (etat){
       case 'INCONNU':
-        return EtatVoie.INCONNU;
+        return EtatVoie.inconnu;
       case 'FLUIDE':
-        return EtatVoie.FLUIDE;
+        return EtatVoie.fluide;
       case 'EMBOUTEILLE':
-        return EtatVoie.EMBOUTEILLE;
+        return EtatVoie.embouteille;
       case 'DENSE':
-        return EtatVoie.DENSE;
+        return EtatVoie.dense;
       default:
-        return EtatVoie.INCONNU;
+        return EtatVoie.inconnu;
     }
   }
 
@@ -241,7 +237,6 @@ class HomeController extends GetxController {
       var allData = json.decode(response.body) as Map<dynamic, dynamic>;
 
       for (var element in allData['features']) {
-        print(allData);
         if(isInSquare(element['geometry']['coordinates'][0], element['geometry']['coordinates'][1])) {
           addressListSearch.add(SearchAdressModel.fromMap(element));
         }
@@ -249,7 +244,7 @@ class HomeController extends GetxController {
 
       startSearching.value = false;
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 

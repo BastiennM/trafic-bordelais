@@ -1,6 +1,7 @@
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
+// ignore: constant_identifier_names
 const String DD_MM_YYYY = 'dd/MM/yyyy';
 
 extension DateTimeExtension on DateTime {

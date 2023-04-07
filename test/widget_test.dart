@@ -14,7 +14,7 @@ import 'package:trafic_bordeaux/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(config: Config(appName: ''),));
+    await tester.pumpWidget(MyApp(config: Config(appName: ''), local: const Locale('fr', "FR"),));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

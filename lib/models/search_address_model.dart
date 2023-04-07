@@ -6,7 +6,6 @@ class SearchAdressModel{
   SearchAdressModel({required this.name, required this.latitude, required this.longitude});
 
   factory SearchAdressModel.fromMap(Map data) {
-    print(data);
     return SearchAdressModel(
       name: data['properties']['name'],
       latitude: data['geometry']['coordinates'][1],

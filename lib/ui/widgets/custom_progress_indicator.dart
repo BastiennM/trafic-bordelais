@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trafic_bordeaux/core/utils/navigation_service.dart';
 
 class CustomProgressIndicator {
   final double width;

@@ -1,3 +1,3 @@
-enum EtatVoie { INCONNU, FLUIDE, EMBOUTEILLE, DENSE }
+enum EtatVoie { inconnu, fluide, embouteille, dense }
 
 enum AuthType { register, login }

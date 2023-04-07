@@ -27,10 +27,10 @@ class StateRoadIndicator {
     Widget svgIndicator;
 
     Map possibilities = {
-      EtatVoie.INCONNU: Text('?', style: TextStyle(fontSize: 20, color: !themeMode.isDark.value ? Colors.white : Colors.black)),
-      EtatVoie.DENSE: SvgPicture.string(orangeCarState),
-      EtatVoie.EMBOUTEILLE: SvgPicture.string(redTurtleState),
-      EtatVoie.FLUIDE: SvgPicture.string(greenRabbitState),
+      EtatVoie.inconnu: Text('?', style: TextStyle(fontSize: 20, color: !themeMode.isDark.value ? Colors.white : Colors.black)),
+      EtatVoie.dense: SvgPicture.string(orangeCarState),
+      EtatVoie.embouteille: SvgPicture.string(redTurtleState),
+      EtatVoie.fluide: SvgPicture.string(greenRabbitState),
     };
 
     svgIndicator = possibilities[currentEtat] ??
@@ -43,10 +43,10 @@ class StateRoadIndicator {
     Color colorIndicator;
 
     Map possibilities = {
-      EtatVoie.INCONNU: ColorPalette.grey200,
-      EtatVoie.DENSE: ColorPalette.orangeRoadState,
-      EtatVoie.EMBOUTEILLE: ColorPalette.redRoadState,
-      EtatVoie.FLUIDE: ColorPalette.greenRoadState,
+      EtatVoie.inconnu: ColorPalette.grey200,
+      EtatVoie.dense: ColorPalette.orangeRoadState,
+      EtatVoie.embouteille: ColorPalette.redRoadState,
+      EtatVoie.fluide: ColorPalette.greenRoadState,
     };
 
     colorIndicator = possibilities[currentEtat] ?? ColorPalette.grey100;
@@ -58,10 +58,10 @@ class StateRoadIndicator {
     TypeMessage typeMessage;
 
     Map possibilities = {
-      EtatVoie.INCONNU: TypeMessage.informational,
-      EtatVoie.DENSE: TypeMessage.warning,
-      EtatVoie.EMBOUTEILLE: TypeMessage.error,
-      EtatVoie.FLUIDE: TypeMessage.success,
+      EtatVoie.inconnu: TypeMessage.informational,
+      EtatVoie.dense: TypeMessage.warning,
+      EtatVoie.embouteille: TypeMessage.error,
+      EtatVoie.fluide: TypeMessage.success,
     };
 
     typeMessage = possibilities[currentEtat] ?? TypeMessage.informational;
@@ -73,10 +73,10 @@ class StateRoadIndicator {
     String stateMessage;
 
     Map possibilities = {
-      EtatVoie.INCONNU: 'unknown'.tr,
-      EtatVoie.DENSE: 'heavy'.tr,
-      EtatVoie.EMBOUTEILLE: 'jam'.tr,
-      EtatVoie.FLUIDE: 'fluid'.tr,
+      EtatVoie.inconnu: 'unknown'.tr,
+      EtatVoie.dense: 'heavy'.tr,
+      EtatVoie.embouteille: 'jam'.tr,
+      EtatVoie.fluide: 'fluid'.tr,
     };
 
     stateMessage = possibilities[currentEtat] ?? 'unknown'.tr;

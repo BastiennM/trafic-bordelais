@@ -24,7 +24,7 @@ class Profil extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(height: 130),
+              const SizedBox(height: 130),
             Center(
             child: Text(
               'my_profil'.tr,

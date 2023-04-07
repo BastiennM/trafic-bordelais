@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trafic_bordeaux/controller/theme_mode_controller.dart';
 import '../../core/app_export.dart';
 import '../../core/constants/color_palette.dart';
@@ -100,7 +99,7 @@ class CustomButton extends StatelessWidget {
     return Text(label,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              color: disabled || onPressed == null
+              color: disabled
                   ? ColorPalette.grey200
                   : fill
                       ? Theme.of(Get.key.currentContext!).primaryColor

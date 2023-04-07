@@ -25,7 +25,7 @@ final Map<String, String> frFR = {
   'isConnectedIndicationTrip' : "Connectez-vous pour accèder à vos trajets ",
   'disconnect' : 'Se déconnecter',
   'no_result' : 'Aucun résultat',
-  'email_size' : "L\'adresse doit faire au moins 3 caractères",
+  'email_size' : "L'adresse doit faire au moins 3 caractères",
   'find_adress' : 'Commencez à rechercher une adresse !',
   'refresh' : 'Rafraichissement des données dans :',
   'my_profil' : 'Mon profil',

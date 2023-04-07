@@ -1,5 +1,3 @@
-import 'package:latlong2/latlong.dart';
-
 double westBound = -0.8835;
 double eastBound = -0.44377;
 double southBound = 44.730085;

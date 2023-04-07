@@ -168,10 +168,10 @@ class _HomeState extends State<Home> {
       context: Get.context!,
       removeTop: true,
       child: ListView.separated(
-          itemCount: homeController.addressListSearch.value.length,
+          itemCount: homeController.addressListSearch.length,
           itemBuilder: (BuildContext context, int index) {
             SearchAdressModel item =
-                homeController.addressListSearch.value[index];
+                homeController.addressListSearch[index];
 
             return Container(
               padding: const EdgeInsets.all(20.0),
@@ -187,7 +187,7 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   homeController.mapController
                       .move(LatLng(item.latitude, item.longitude), 18);
-                  homeController.listMarker.value.add(Marker(
+                  homeController.listMarker.add(Marker(
                       point: LatLng(item.latitude, item.longitude),
                       builder: (BuildContext context) {
                         return const Icon(
@@ -241,9 +241,9 @@ class _HomeState extends State<Home> {
       if (homeController.emptyAfterSearch.value) {
         widgetToReturn = getEmptyResult();
       }
-      if (homeController.addressListSearch.value.isNotEmpty) {
+      if (homeController.addressListSearch.isNotEmpty) {
         widgetToReturn = getListResultSearch();
-      } else if (homeController.addressListSearch.value.isEmpty &&
+      } else if (homeController.addressListSearch.isEmpty &&
           homeController.searchString.value == "") {
         widgetToReturn = Center(child: Text('find_adress'.tr, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: !themeModeController.isDark.value ? Colors.white : Colors.black)));
       }

@@ -4,20 +4,18 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
 
-  static const HOME = _Paths.HOME;
-  static const BUTTONS = _Paths.BUTTONS;
-  static const INPUTS = _Paths.INPUTS;
-  static const DIALOG_POPUP = _Paths.DIALOG_POPUP;
+  static const home = _Paths.home;
+  static const buttons = _Paths.buttons;
+  static const inputs = _Paths.inputs;
+  static const dialogPopup = _Paths.dialogPopup;
 }
 
 abstract class _Paths {
-  static const HOME = '/home';
-  static const WIDGET_KIT = '/widget_kit';
-  static const BUTTONS = '/buttons';
-  static const INPUTS = '/inputs';
-  static const MODAL = '/modal';
-  static const DIALOG_POPUP = '/dialog_popup';
-  static const LOGIN = '/login';
-  static const REGISTER = '/register';
-  static const PROFIL = '/profil';
+  static const home = '/home';
+  static const buttons = '/buttons';
+  static const inputs = '/inputs';
+  static const dialogPopup = '/dialog_popup';
+  static const login = '/login';
+  static const register = '/register';
+  static const profile = '/profil';
 }

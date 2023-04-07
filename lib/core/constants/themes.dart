@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 abstract class Themes {
   static Color primary = const Color(0xff246EE9);
@@ -13,16 +12,13 @@ abstract class Themes {
 
   static const Color _lightWhite = Colors.white;
   static const Color _lightBlack = Colors.black87;
-  static const Color _lightGreyText = Colors.grey;
   static const Color _lightOnPrimaryColor = Colors.black;
   static Color accentDark = Colors.white;
   static final Color? _lightUnselectedIconColor = Colors.grey[500];
-  static const Color _lightGrey100 = Color(0xFFB2B2B2);
   static final Color? _lightGrey50 = Colors.grey[50];
 
 
   static const Color _darkWhite = Colors.white;
-  static const Color _darkBlack = Colors.black;
   static const Color _darkPrimaryVariantColor = Color(0xFF212121);
   static const Color _darkOnPrimaryColor = Colors.white;
   static const Color _darkBackgroundColor = Color(0xFF2F2F2F);
@@ -31,7 +27,6 @@ abstract class Themes {
   static const Color _darkGrey200 = Color(0xFF7E7E7E);
   static const Color _darkGrey300 = Color(0xFF121212);
   static final Color? _darkGrey700 = Colors.grey[700];
-  static final Color? _darkGrey900 = Colors.grey[900];
 
   static final ThemeData lightTheme = ThemeData(
     backgroundColor: Colors.black,

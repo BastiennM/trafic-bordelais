@@ -41,14 +41,12 @@ class MapWidget extends StatelessWidget {
                   subdomains: const ['a', 'b', 'c'],
                   tileBuilder: themeModeController.isDark.value ? null : darkModeTileBuilder,
               ),
-              Obx(() => MarkerLayer(
-                markers: homeController.listMarker.value,
-              )),
-              Obx(() => (
-                  PolylineLayer(
-                      polylines: homeController.polylineToDisplay.value
-                  )
-              )),
+              MarkerLayer(
+                markers: homeController.listMarker,
+              ),
+              PolylineLayer(
+                      polylines: homeController.polylineToDisplay
+              )
             ],
           ) : const Center(child: CircularProgressIndicator(color: Colors.black,)));
   }
